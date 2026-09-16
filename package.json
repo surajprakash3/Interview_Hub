@@ -1,0 +1,11 @@
+{
+  "name": "mnc-code-hub",
+  "version": "1.0.0",
+  "description": "MNC Coding Questions, Python OOP, SQL Tutorials, and Verbal Ability Preparation",
+  "scripts": {
+    "start": "run.bat"
+  },
+  "keywords": ["mnc", "interview", "coding", "python", "sql", "verbal"],
+  "author": "KN Academy",
+  "license": "ISC"
+}
