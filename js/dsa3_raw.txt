@@ -1,0 +1,1098 @@
+ARRAYS
+1 Best Time to Buy and Sell Stock 121
+2 Merge Sorted Array 88
+3 Find Missing and Repeated Values 2965
+4 Two Sum 1
+5 Contains Duplicate 217
+6 Maximum Subarray 53
+7 Move Zeroes 283
+8 Remove Duplicates from Sorted Array 26
+9 Majority Element 169
+10 Rotate Array 189
+11 Missing Number 268
+12 Single Number 136
+13 Jump Game II 45
+14 3Sum 15
+15 Container With Most Water 11
+16 Product of Array Except Self 238
+17 Subarray Sum Equals K 560
+18 Maximum Product Subarray 152
+19 Sort Colors 75
+20 Next Permutation 31
+21 Merge Intervals 56
+22 Insert Interval 57
+23 Non-overlapping Intervals 435
+24 Longest Consecutive Sequence 128
+25 Set Matrix Zeroes 73
+26 Spiral Matrix 54
+27 Rotate Image 48
+28 Kth Largest Element in an Array 215
+PREFIX/SUFFIX TECHNIQUES
+29 Product of Array Except Self 238
+30 Maximum Subarray 53
+31 Subarray Sum Equals K 560
+32 Find Pivot Index 724
+33 Range Sum Query – Immutable 303
+34 Subarray Sums Divisible by K 974
+35 Continuous Subarray Sum 523
+36 Running Sum of 1d Array 1480
+37 Minimum Value to Get Positive Step by Step Sum 1413
+38 Trapping Rain Water 42
+39 Maximum Product Subarray 152
+40 Find the Highest Altitude 1732
+Fixed-Size Sliding Window
+41 Maximum Average Subarray I 643
+42 Maximum Points You Can Obtain from Cards 1423
+43 Sliding Window Maximum 239
+44 Find All Anagrams in a String 438
+45 Permutation in String 567
+Variable-Size Sliding Window
+46 Minimum Size Subarray Sum 209
+47 Longest Substring Without Repeating Characters 3
+48 Longest Repeating Character Replacement 424
+49 Fruit Into Baskets 904
+50 Max Consecutive Ones III 1004
+51 Minimum Window Substring 76
+52 Subarrays with K Different Integers 992
+53 Longest Subarray of 1's After Deleting One Element 1493
+BINARY SEARCH PATTERNS
+54 Binary Search 704
+55 Search Insert Position 35
+56 First Bad Version 278
+57 Guess Number Higher or Lower 374
+58 Find First and Last Position of Element in Sorted Array 34
+59 Search Insert Position 35
+60 Find First and Last Position of Element in Sorted Array 34
+61 Find Smallest Letter Greater Than Target 744
+62 Find K Closest Elements 658
+63 Search in Rotated Sorted Array 33
+64 Find Minimum in Rotated Sorted Array 153
+65 Search in Rotated Sorted Array II 81
+66 Find Minimum in Rotated Sorted Array II 154
+67 Sqrt(x) 69
+68 Valid Perfect Square 367
+69 Koko Eating Bananas 875
+70 Capacity To Ship Packages Within D Days 1011
+71 Find the Smallest Divisor Given a Threshold 1283
+72 Minimum Number of Days to Make m Bouquets 1482
+73 Split Array Largest Sum 410
+74 Magnetic Force Between Two Balls 1552
+75 Minimize Maximum Distance to Gas Station 774
+76 Search a 2D Matrix 74
+77 Search a 2D Matrix II 240
+78 Kth Smallest Element in a Sorted Matrix 378
+79 Find a Peak Element II 1901
+80 Find Peak Element 162
+81 Peak Index in a Mountain Array 852
+82 Find in Mountain Array 1095
+83 Find the Duplicate Number 287
+84 Single Element in a Sorted Array 540
+85 Median of Two Sorted Arrays 4
+86 Kth Missing Positive Number 1539
+87 H-Index II 275
+88 Find Right Interval 436
+89 Time Based Key-Value Store 981
+PARAMETRIC SEARCH
+90 Sqrt(x) 69
+91 Valid Perfect Square 367
+92 Koko Eating Bananas 875
+93 Capacity To Ship Packages Within D Days 1011
+94 Find the Smallest Divisor Given a Threshold 1283
+95 Minimum Number of Days to Make m Bouquets 1482
+96 Magnetic Force Between Two Balls 1552
+97 Split Array Largest Sum 410
+98 Minimize Maximum Distance to Gas Station 774
+99 Maximum Candies Allocated to K Children 2226
+100 Maximum Running Time of N Computers 2141
+101 Minimum Time to Complete Trips 2187
+102 Minimum Time to Repair Cars 2594
+103 House Robber IV 2560
+104 Minimize the Maximum of Two Arrays 2513
+105 Minimum Limit of Balls in a Bag 1760
+106 Maximum Tastiness of Candy Basket 2517
+107 Minimum Speed to Arrive on Time 1870
+108 Maximum Number of Removable Characters 1898
+109 Aggressive Cows —
+110 Book Allocation Problem —
+111 Painter's Partition Problem —
+LINKED LIST
+112 Merge Two Sorted Lists 21
+113 Middle of the Linked List 876
+114 Add Two Numbers 2
+115 Palindrome Linked List 234
+116 Linked List Cycle 141
+117 Linked List Cycle II 142
+118 Remove Nth Node From End of List 19
+119 Intersection of Two Linked Lists 160
+120 Reverse Linked List 206
+121 Reverse Linked List II 92
+122 Reorder List 143
+123 Remove Duplicates from Sorted List 83
+124 Remove Duplicates from Sorted List II 82
+125 Delete the Middle Node of a Linked List 2095
+126 Rotate List 61
+127 Odd Even Linked List 328
+128 Sort List 148
+129 Flatten a Multilevel Doubly Linked List 430
+130 Reverse Nodes in k-Group 25
+131 Copy List with Random Pointer 138
+132 Merge k Sorted Lists 23
+133 LRU Cache 146
+134 Swap Nodes in Pairs 24
+135 Split Linked List in Parts 725
+FAST & SLOW POINTER
+136 Middle of the Linked List 876
+137 Linked List Cycle 141
+138 Linked List Cycle II 142
+139 Palindrome Linked List 234
+140 Remove Nth Node From End of List 19
+141 Reorder List 143
+142 Find the Duplicate Number 287
+STACK
+143 Valid Parentheses 20
+144 Min Stack 155
+145 Implement Stack using Queues 225
+146 Implement Queue using Stacks 232
+147 Evaluate Reverse Polish Notation 150
+148 Daily Temperatures 739
+149 Next Greater Element I 496
+150 Next Greater Element II 503
+151 Next Greater Element III 556
+152 Largest Rectangle in Histogram 84
+153 Maximal Rectangle 85
+154 Remove K Digits 402
+155 Decode String 394
+156 Simplify Path 71
+157 Asteroid Collision 735
+158 Car Fleet 853
+159 Online Stock Span 901
+160 Basic Calculator II 227
+161 Basic Calculator 224
+162 Trapping Rain Water 42
+163 Remove All Adjacent Duplicates in String 1047
+164 Remove All Adjacent Duplicates in String II 1209
+165 Backspace String Compare 844
+166 Minimum Add to Make Parentheses Valid 921
+167 Minimum Remove to Make Valid Parentheses 1249
+168 Score of Parentheses 856
+169 Make The String Great 1544
+170 Find the Most Competitive Subsequence 1673
+QUEUE
+171 Implement Queue using Stacks 232
+172 Implement Stack using Queues 225
+173 Design Circular Queue 622
+174 Number of Recent Calls 933
+175 Number of Islands 200
+176 Binary Tree Level Order Traversal 102
+177 Binary Tree Zigzag Level Order Traversal 103
+178 Rotting Oranges 994
+179 Open the Lock 752
+180 Perfect Squares 279
+181 Word Ladder 127
+182 Sliding Window Maximum 239
+183 Reveal Cards In Increasing Order 950
+184 Dota2 Senate 649
+185 Time Needed to Buy Tickets 2073
+186 Number of Students Unable to Eat Lunch 1700
+187 First Unique Character in a String 387
+188 Moving Average from Data Stream 346
+189 Design Front Middle Back Queue 1670
+190 Shortest Path in Binary Matrix 1091
+MONOTONIC STACK & QUEUE
+191 Next Greater Element I 496
+192 Next Greater Element II 503
+193 Daily Temperatures 739
+194 Online Stock Span 901
+195 Largest Rectangle in Histogram 84
+196 Maximal Rectangle 85
+197 Trapping Rain Water 42
+198 Remove K Digits 402
+199 Most Competitive Subsequence 1673
+200 Sum of Subarray Minimums 907
+201 Sum of Subarray Ranges 2104
+202 Remove Nodes From Linked List 2487
+203 Final Prices With a Special Discount in a Shop 1475
+204 Shortest Subarray with Sum at Least K 862
+205 Sliding Window Maximum 239
+206 Constrained Subsequence Sum 1425
+207 Jump Game VI 1696
+208 Longest Continuous Subarray With Absolute Diff <= Limit 1438
+209 Constrained Subsequence Sum 1425
+210 Maximum of Minimum Values in All Subarrays —
+TREE TRAVERSALS
+211 Binary Tree Preorder Traversal 144
+212 Binary Tree Inorder Traversal 94
+213 Binary Tree Postorder Traversal 145
+214 Binary Tree Level Order Traversal 102
+215 Binary Tree Zigzag Level Order Traversal 103
+216 Binary Tree Right Side View 199
+217 Binary Tree Left Side View —
+218 Maximum Depth of Binary Tree 104
+219 Minimum Depth of Binary Tree 111
+220 Same Tree 100
+221 Symmetric Tree 101
+222 Invert Binary Tree 226
+223 Count Complete Tree Nodes 222
+224 Kth Smallest Element in a BST 230
+225 Validate Binary Search Tree 98
+226 Inorder Successor in BST 285
+227 Inorder Predecessor in BST —
+228 Lowest Common Ancestor of a Binary Tree 236
+229 Lowest Common Ancestor of a BST 235
+230 Construct Binary Tree from Preorder and Inorder Traversal 105
+231 Construct Binary Tree from Inorder and Postorder Traversal 106
+232 Binary Tree Paths 257
+233 Path Sum 112
+234 Path Sum II 113
+235 Sum Root to Leaf Numbers 129
+236 Diameter of Binary Tree 543
+237 Balanced Binary Tree 110
+238 Flatten Binary Tree to Linked List 114
+239 Boundary of Binary Tree 545
+240 Vertical Order Traversal of a Binary Tree 987
+241 Top View of Binary Tree —
+242 Bottom View of Binary Tree —
+BINARY TREE
+243 Maximum Depth of Binary Tree 104
+244 Minimum Depth of Binary Tree 111
+245 Same Tree 100
+246 Symmetric Tree 101
+247 Invert Binary Tree 226
+248 Binary Tree Preorder Traversal 144
+249 Binary Tree Inorder Traversal 94
+250 Binary Tree Postorder Traversal 145
+251 Binary Tree Level Order Traversal 102
+252 Binary Tree Zigzag Level Order Traversal 103
+253 Binary Tree Right Side View 199
+254 Binary Tree Left Side View —
+255 Binary Tree Paths 257
+256 Path Sum 112
+257 Path Sum II 113
+258 Sum Root to Leaf Numbers 129
+259 Diameter of Binary Tree 543
+260 Balanced Binary Tree 110
+261 Lowest Common Ancestor of a Binary Tree 236
+262 Construct Binary Tree from Preorder and Inorder Traversal 105
+263 Construct Binary Tree from Inorder and Postorder Traversal 106
+264 Flatten Binary Tree to Linked List 114
+265 Populating Next Right Pointers in Each Node 116
+266 Populating Next Right Pointers in Each Node II 117
+267 Count Complete Tree Nodes 222
+268 Boundary of Binary Tree 545
+269 Vertical Order Traversal of a Binary Tree 987
+270 Top View of Binary Tree —
+271 Bottom View of Binary Tree —
+272 Maximum Width of Binary Tree 662
+273 All Nodes Distance K in Binary Tree 863
+274 Binary Tree Maximum Path Sum 124
+275 Serialize and Deserialize Binary Tree 297
+276 House Robber III 337
+277 Sum of Left Leaves 404
+278 Find Bottom Left Tree Value 513
+279 Even Odd Tree 1609
+280 Cousins in Binary Tree 993
+BST
+281 Search in a Binary Search Tree 700
+282 Insert into a Binary Search Tree 701
+283 Delete Node in a BST 450
+284 Validate Binary Search Tree 98
+285 Kth Smallest Element in a BST 230
+286 Inorder Successor in BST 285
+287 Inorder Predecessor in BST —
+288 Lowest Common Ancestor of a BST 235
+289 Convert Sorted Array to Binary Search Tree 108
+290 Convert Sorted List to Binary Search Tree 109
+291 Two Sum IV - Input is a BST 653
+292 Minimum Absolute Difference in BST 530
+293 Find Mode in Binary Search Tree 501
+294 Range Sum of BST 938
+295 Trim a Binary Search Tree 669
+296 Recover Binary Search Tree 99
+297 Balance a Binary Search Tree 1382
+298 Increasing Order Search Tree 897
+299 All Elements in Two Binary Search Trees 1305
+300 Binary Search Tree Iterator 173
+301 Construct Binary Search Tree from Preorder Traversal 1008
+302 Unique Binary Search Trees 96
+303 Unique Binary Search Trees II 95
+304 Verify Preorder Sequence in Binary Search Tree 255
+305 Delete Nodes And Return Forest 1110
+306 Split BST 776
+307 Largest BST Subtree —
+308 Recover a BST 99
+AVL
+309 Implement an AVL Tree —
+310 Insert a Node in an AVL Tree —
+311 Delete a Node from an AVL Tree —
+312 Search in an AVL Tree —
+313 Calculate Height of an AVL Tree —
+314 Calculate Balance Factor of a Node —
+315 Perform LL Rotation —
+316 Perform RR Rotation —
+317 Perform LR Rotation —
+318 Perform RL Rotation —
+319 Identify the Required Rotation for an Unbalanced Node —
+320 Insert Multiple Keys and Construct the AVL Tree —
+321 Delete Multiple Keys and Rebalance the AVL Tree —
+322 Validate Whether a Binary Tree is Height-Balanced 110
+323 Convert a Sorted Array to a Height-Balanced BST 108
+324 Balance a Binary Search Tree 1382
+325 Check Whether a BST Can Be Balanced —
+326 Compare Heights and Balance Factors After Insertions —
+327 Find the Height of an AVL Tree After N Insertions —
+SEGMENT TREE
+328 Implement Segment Tree —
+329 Build a Segment Tree for Range Sum Query —
+330 Range Sum Query – Mutable 307
+331 Range Minimum Query using Segment Tree —
+332 Range Maximum Query using Segment Tree —
+333 Point Update in Segment Tree —
+334 Range Update in Segment Tree —
+335 Lazy Propagation in Segment Tree —
+336 Range Sum Query with Lazy Propagation —
+337 Range Minimum Query with Lazy Propagation —
+338 Range Maximum Query with Lazy Propagation —
+339 Count of Smaller Numbers After Self 315
+340 Count of Range Sum 327
+341 The Skyline Problem 218
+342 My Calendar III 732
+343 Falling Squares 699
+344 Range Sum of Sorted Subarray Sums 1508
+345 Number of Longest Increasing Subsequence 673
+346 Reverse Pairs 493
+347 Create Sorted Array through Instructions 1649
+HEAP
+348 Implement Min Heap —
+349 Implement Max Heap —
+350 Heapify an Array —
+351 Build Heap from an Array —
+352 Kth Largest Element in an Array 215
+353 Kth Smallest Element in an Array —
+354 Kth Largest Element in a Stream 703
+355 Top K Frequent Elements 347
+356 Top K Frequent Words 692
+357 K Closest Points to Origin 973
+358 Find K Pairs with Smallest Sums 373
+359 Merge k Sorted Lists 23
+360 Find Median from Data Stream 295
+361 Sliding Window Median 480
+362 Sort an Array 912
+363 Sort Characters By Frequency 451
+364 Last Stone Weight 1046
+365 Task Scheduler 621
+366 Reorganize String 767
+367 Single-Threaded CPU 1834
+368 Maximum Performance of a Team 1383
+369 IPO 502
+370 Minimum Cost to Hire K Workers 857
+371 Smallest Range Covering Elements from K Lists 632
+372 Find K-th Smallest Pair Distance 719
+PRIORITY QUEUE
+373 Kth Largest Element in a Stream 703
+374 Kth Largest Element in an Array 215
+375 Top K Frequent Elements 347
+376 Top K Frequent Words 692
+377 K Closest Points to Origin 973
+378 Find K Pairs with Smallest Sums 373
+379 Merge k Sorted Lists 23
+380 Find Median from Data Stream 295
+381 Sliding Window Median 480
+382 Last Stone Weight 1046
+383 Task Scheduler 621
+384 Reorganize String 767
+385 Single-Threaded CPU 1834
+386 Maximum Performance of a Team 1383
+387 IPO 502
+388 Minimum Cost to Hire K Workers 857
+389 Smallest Range Covering Elements from K Lists 632
+390 Meeting Rooms II 253
+391 Minimum Number of Refueling Stops 871
+392 Furthest Building You Can Reach 1642
+393 Process Tasks Using Servers 1882
+394 Total Cost to Hire K Workers 2462
+395 Minimum Cost to Connect Sticks —
+396 Huffman Coding —
+397 Dijkstra's Shortest Path Algorithm 743
+398 Prim's Minimum Spanning Tree Algorithm —
+TOP-K ELEMENTS
+399 Kth Largest Element in an Array 215
+400 Kth Largest Element in a Stream 703
+401 Top K Frequent Elements 347
+402 Top K Frequent Words 692
+403 K Closest Points to Origin 973
+404 Kth Smallest Element in a Sorted Matrix 378
+405 Kth Smallest Pair Distance 719
+406 Find K Pairs with Smallest Sums 373
+407 Find K Closest Elements 658
+408 Kth Smallest Element in a BST 230
+409 Kth Largest Element in a BST —
+410 Kth Smallest Number in Multiplication Table 668
+411 Kth Smallest Prime Fraction 786
+412 K Highest Ranked Items Within a Price Range 2146
+413 The K Weakest Rows in a Matrix 1337
+414 Find Subsequence of Length K With the Largest Sum 2099
+415 Maximum Subsequence Score 2542
+416 Kth Largest Sum in a Binary Tree 2583
+417 Kth Largest Integer in the Array 1985
+418 Find the K-Sum of an Array 2386
+419 Find the Kth Largest Integer in the Array 1985
+420 K-th Smallest in Lexicographical Order 440
+HASHING
+421 Two Sum 1
+422 Contains Duplicate 217
+423 Contains Duplicate II 219
+424 Valid Anagram 242
+425 Group Anagrams 49
+426 Longest Consecutive Sequence 128
+427 Majority Element 169
+428 Majority Element II 229
+429 First Unique Character in a String 387
+430 Ransom Note 383
+431 Intersection of Two Arrays 349
+432 Intersection of Two Arrays II 350
+433 Happy Number 202
+434 Isomorphic Strings 205
+435 Word Pattern 290
+436 Longest Substring Without Repeating Characters 3
+437 Subarray Sum Equals K 560
+438 Longest Subarray with Sum K —
+439 Subarray Sums Divisible by K 974
+440 Continuous Subarray Sum 523
+441 4Sum II 454
+442 3Sum 15
+443 4Sum 18
+444 Two Sum II – Input Array Is Sorted 167
+445 Top K Frequent Elements 347
+446 Top K Frequent Words 692
+447 Find All Anagrams in a String 438
+448 Permutation in String 567
+449 Minimum Window Substring 76
+450 Longest Palindrome 409
+451 Find Duplicate Subtrees 652
+452 Copy List with Random Pointer 138
+453 LRU Cache 146
+454 Design HashMap 706
+455 Design HashSet 705
+456 Insert Delete GetRandom O(1) 380
+457 Insert Delete GetRandom O(1) – Duplicates Allowed 381
+458 LFU Cache 460
+459 Time Based Key-Value Store 981
+460 Logger Rate Limiter 359
+461 Design Underground System 1396
+462 Find the Difference of Two Arrays 2215
+463 Unique Number of Occurrences 1207
+464 Count Number of Bad Pairs 2364
+465 Number of Good Pairs 1512
+466 Longest Arithmetic Subsequence 1027
+467 Subarray with 0 Sum —
+468 Count Subarrays with Given XOR —
+MAPS
+469 Two Sum 1
+470 Contains Duplicate 217
+471 Valid Anagram 242
+472 Group Anagrams 49
+473 Majority Element 169
+474 First Unique Character in a String 387
+475 Isomorphic Strings 205
+476 Word Pattern 290
+477 Subarray Sum Equals K 560
+478 Subarray Sums Divisible by K 974
+479 Continuous Subarray Sum 523
+480 Longest Subarray with Sum K —
+481 Longest Consecutive Sequence 128
+482 Top K Frequent Elements 347
+483 Top K Frequent Words 692
+484 Find All Anagrams in a String 438
+485 Permutation in String 567
+486 Minimum Window Substring 76
+487 4Sum II 454
+488 Number of Good Pairs 1512
+489 Count Number of Bad Pairs 2364
+490 Find Duplicate Subtrees 652
+491 Copy List with Random Pointer 138
+492 LRU Cache 146
+493 LFU Cache 460
+494 Design HashMap 706
+495 Design HashSet 705
+496 Insert Delete GetRandom O(1) 380
+497 Time Based Key-Value Store 981
+498 Logger Rate Limiter 359
+499 Design Underground System 1396
+500 Find the Difference of Two Arrays 2215
+501 Unique Number of Occurrences 1207
+502 Rank Transform of an Array 1331
+503 Degree of an Array 697
+504 Brick Wall 554
+505 Most Frequent Even Element 2404
+506 Destination City 1436
+507 Find Players With Zero or One Losses 2225
+508 Time Needed to Inform All Employees 1376
+SETS
+509 Contains Duplicate 217
+510 Contains Duplicate II 219
+511 Longest Consecutive Sequence 128
+512 Intersection of Two Arrays 349
+513 Intersection of Two Arrays II 350
+514 Happy Number 202
+515 Single Number 136
+516 Find the Difference of Two Arrays 2215
+517 Unique Number of Occurrences 1207
+518 Set Matrix Zeroes 73
+519 First Missing Positive 41
+520 Missing Number 268
+521 Find All Numbers Disappeared in an Array 448
+522 Find Common Characters 1002
+523 Distribute Candies 575
+524 Fair Candy Swap 888
+525 Two Out of Three 2032
+526 Count the Number of Consistent Strings 1684
+527 Maximum Number of Balloons 1189
+528 Determine if Two Strings Are Close 1657
+529 Word Break 139
+530 Word Break II 140
+531 Repeated DNA Sequences 187
+532 Longest Substring Without Repeating Characters 3
+533 Minimum Window Substring 76
+534 3Sum 15
+535 4Sum 18
+536 Valid Sudoku 36
+537 Sudoku Solver 37
+538 Robot Room Cleaner 489
+539 Number of Distinct Islands 694
+540 Making A Large Island 827
+541 Accounts Merge 721
+542 Most Stones Removed with Same Row or Column 947
+543 Design HashSet 705
+544 Design a Food Rating System 2353
+545 My Calendar I 729
+546 My Calendar II 731
+STRING HASHING
+547 Find the Index of the First Occurrence in a String 28
+548 Repeated Substring Pattern 459
+549 Longest Common Prefix 14
+550 Valid Anagram 242
+551 Group Anagrams 49
+552 Isomorphic Strings 205
+553 Longest Substring Without Repeating Characters 3
+554 Find All Anagrams in a String 438
+555 Permutation in String 567
+556 Repeated DNA Sequences 187
+557 Rabin-Karp String Matching —
+558 Implement strStr() using Rolling Hash 28
+559 Longest Duplicate Substring 1044
+560 Shortest Palindrome 214
+561 Distinct Echo Substrings 1316
+562 Longest Happy Prefix 1392
+563 Find Substring With Given Hash Value 2156
+564 Substring with Concatenation of All Words 30
+565 Number of Matching Subsequences 792
+566 Word Pattern 290
+567 Word Break 139
+568 Word Break II 140
+569 Encode and Decode Strings —
+570 Palindromic Substrings 647
+571 Longest Palindromic Substring 5
+572 Palindrome Pairs 336
+573 Find Duplicate Subtrees 652
+574 Count Unique Characters of All Substrings of a Given String 828
+575 Longest Duplicate Substring using Binary Search + Hashing 1044
+BFS
+576 Binary Tree Level Order Traversal 102
+577 Binary Tree Zigzag Level Order Traversal 103
+578 Minimum Depth of Binary Tree 111
+579 Number of Islands 200
+580 Flood Fill 733
+581 Rotting Oranges 994
+582 01 Matrix 542
+583 Walls and Gates —
+584 Shortest Path in Binary Matrix 1091
+585 Word Ladder 127
+586 Word Ladder II 126
+587 Open the Lock 752
+588 Perfect Squares 279
+589 Snakes and Ladders 909
+590 Minimum Knight Moves 1197
+591 As Far from Land as Possible 1162
+592 Shortest Bridge 934
+593 Pacific Atlantic Water Flow 417
+594 Surrounded Regions 130
+595 Clone Graph 133
+596 Is Graph Bipartite? 785
+597 Possible Bipartition 886
+598 Course Schedule 207
+599 Course Schedule II 210
+600 Minimum Genetic Mutation 433
+601 Bus Routes 815
+602 Shortest Path with Alternating Colors 1129
+603 All Nodes Distance K in Binary Tree 863
+604 Amount of Time for Binary Tree to Be Infected 2385
+605 Find if Path Exists in Graph 1971
+606 Nearest Exit from Entrance in Maze 1926
+607 Keys and Rooms 841
+608 Shortest Path in a Grid with Obstacles Elimination 1293
+DFS
+609 Binary Tree Preorder Traversal 144
+610 Binary Tree Inorder Traversal 94
+611 Binary Tree Postorder Traversal 145
+612 Maximum Depth of Binary Tree 104
+613 Same Tree 100
+614 Symmetric Tree 101
+615 Invert Binary Tree 226
+616 Diameter of Binary Tree 543
+617 Balanced Binary Tree 110
+618 Path Sum 112
+619 Path Sum II 113
+620 Lowest Common Ancestor of a Binary Tree 236
+621 Binary Tree Maximum Path Sum 124
+622 Flatten Binary Tree to Linked List 114
+623 Number of Islands 200
+624 Flood Fill 733
+625 Surrounded Regions 130
+626 Pacific Atlantic Water Flow 417
+627 Clone Graph 133
+628 Find if Path Exists in Graph 1971
+629 Number of Provinces 547
+630 Max Area of Island 695
+631 Count Connected Components in an Undirected Graph 323
+632 Graph Valid Tree 261
+633 Is Graph Bipartite? 785
+634 Possible Bipartition 886
+635 Course Schedule 207
+636 Course Schedule II 210
+637 All Paths From Source to Target 797
+638 Keys and Rooms 841
+639 Reconstruct Itinerary 332
+640 Word Search 79
+641 Letter Combinations of a Phone Number 17
+642 Combination Sum 39
+643 Subsets 78
+644 Permutations 46
+645 N-Queens 51
+646 Generate Parentheses 22
+647 Palindrome Partitioning 131
+648 Number of Enclaves 1020
+649 Count Sub Islands 1905
+650 Critical Connections in a Network 1192
+CONNECTED COMPONENTS
+651 Number of Provinces 547
+652 Number of Connected Components in an Undirected Graph 323
+653 Graph Valid Tree 261
+654 Number of Islands 200
+655 Max Area of Island 695
+656 Number of Enclaves 1020
+657 Number of Closed Islands 1254
+658 Count Sub Islands 1905
+659 Surrounded Regions 130
+660 Making A Large Island 827
+661 Most Stones Removed with Same Row or Column 947
+662 Accounts Merge 721
+663 Satisfiability of Equality Equations 990
+664 Redundant Connection 684
+665 Redundant Connection II 685
+666 Number of Operations to Make Network Connected 1319
+667 Regions Cut By Slashes 959
+668 Smallest String With Swaps 1202
+669 Checking Existence of Edge Length Limited Paths 1697
+670 Min Cost to Connect All Points 1584
+671 Kruskal's Minimum Spanning Tree —
+672 Dynamic Number of Islands —
+673 Friend Circles / Connected Friend Groups —
+674 Count Components After Removing Edges —
+SHORTEST PATHS
+675 Shortest Path in Binary Matrix 1091
+676 Word Ladder 127
+677 Open the Lock 752
+678 Minimum Knight Moves 1197
+679 Network Delay Time 743
+680 Cheapest Flights Within K Stops 787
+681 Path With Minimum Effort 1631
+682 Swim in Rising Water 778
+683 Shortest Path in a Grid with Obstacles Elimination 1293
+684 Shortest Path with Alternating Colors 1129
+685 Find the City With the Smallest Number of Neighbors at a Threshold Distance 1334
+686 All-Pairs Shortest Path — Floyd-Warshall —
+687 Dijkstra's Shortest Path Algorithm —
+688 Bellman-Ford Algorithm —
+689 Shortest Path in a DAG —
+690 0-1 BFS Shortest Path —
+691 Cheapest Flights Within K Stops using Bellman-Ford 787
+692 Minimum Cost to Reach Destination in Time 1928
+693 Minimum Cost to Make at Least One Valid Path in a Grid 1368
+694 Minimum Obstacle Removal to Reach Corner 2290
+695 Second Minimum Time to Reach Destination 2045
+696 Number of Ways to Arrive at Destination 1976
+697 Shortest Path Visiting All Nodes 847
+698 Bus Routes 815
+699 Sliding Puzzle 773
+700 Minimum Cost to Connect All Points 1584
+701 Reconstruct Itinerary 332
+702 Cheapest Flights Within K Stops 787
+DIJKSTRA’S
+703 Implement Dijkstra's Shortest Path Algorithm —
+704 Network Delay Time 743
+705 Path With Minimum Effort 1631
+706 Number of Ways to Arrive at Destination 1976
+707 Cheapest Flights Within K Stops 787
+708 Swim in Rising Water 778
+709 Minimum Cost to Reach Destination in Time 1928
+710 Find the City With the Smallest Number of Neighbors at a Threshold Distance 1334
+711 Shortest Path in a Grid with Weighted Cells —
+712 Dijkstra with Multiple Sources —
+713 Dijkstra with Path Reconstruction —
+714 Dijkstra for Shortest Path Between Two Specific Nodes —
+715 Dijkstra on an Adjacency Matrix —
+716 Dijkstra Using a Min Priority Queue —
+717 Second Shortest Path in a Weighted Graph —
+718 Cheapest Route with a Maximum Number of Stops 787
+719 Minimum Cost to Make at Least One Valid Path in a Grid 1368
+720 Minimum Obstacle Removal to Reach Corner 2290
+721 Minimum Cost to Connect All Points 1584
+722 Path With Maximum Probability 1514
+723 Minimum Cost to Reach Destination —
+724 Shortest Path Visiting All Nodes 847
+725 Reachable Nodes In Restricted Subdivided Graph 882
+MST
+726 Implement Prim's MST Algorithm —
+727 Implement Kruskal's MST Algorithm —
+728 Implement DSU / Union-Find —
+729 Minimum Cost to Connect All Points 1584
+730 Connecting Cities With Minimum Cost 1135
+731 Optimize Water Distribution in a Village 1168
+732 Min Cost to Connect All Points using Prim's Algorithm 1584
+733 Min Cost to Connect All Points using Kruskal's Algorithm 1584
+734 Redundant Connection 684
+735 Number of Operations to Make Network Connected 1319
+736 Most Stones Removed with Same Row or Column 947
+737 Accounts Merge 721
+738 Checking Existence of Edge Length Limited Paths 1697
+739 Find Critical and Pseudo-Critical Edges in MST 1489
+740 Minimum Spanning Tree with a Given Edge Constraint —
+741 Second Best Minimum Spanning Tree —
+742 MST with Preconnected Components —
+743 MST with Maximum Edge Constraint —
+744 Kruskal's Algorithm with Edge Sorting —
+745 Prim's Algorithm with Priority Queue —
+DSU / UNION FIND
+746 Implement Disjoint Set Union (Union-Find) —
+747 Union by Rank —
+748 Union by Size —
+749 Path Compression —
+750 Number of Provinces 547
+751 Number of Connected Components in an Undirected Graph 323
+752 Graph Valid Tree 261
+753 Redundant Connection 684
+754 Number of Operations to Make Network Connected 1319
+755 Accounts Merge 721
+756 Most Stones Removed with Same Row or Column 947
+757 Satisfiability of Equality Equations 990
+758 Smallest String With Swaps 1202
+759 Checking Existence of Edge Length Limited Paths 1697
+760 Min Cost to Connect All Points 1584
+761 Connecting Cities With Minimum Cost 1135
+762 Critical and Pseudo-Critical Edges in MST 1489
+763 Regions Cut By Slashes 959
+764 Optimize Water Distribution in a Village 1168
+765 Number of Islands II 305
+766 Graph Connectivity With Threshold 1627
+767 Couples Holding Hands 765
+768 Remove Max Number of Edges to Keep Graph Fully Traversable 1579
+769 Bricks Falling When Hit 803
+770 GCD Sort of an Array 1998
+TOPOLOGICAL SORT
+771 Implement Topological Sort using Kahn's Algorithm (BFS) —
+772 Implement Topological Sort using DFS —
+773 Course Schedule 207
+774 Course Schedule II 210
+775 Alien Dictionary 269
+776 Parallel Courses 1136
+777 Parallel Courses III 2050
+778 Find All Possible Recipes from Given Supplies 2115
+779 Minimum Height Trees 310
+780 Sequence Reconstruction 444
+781 Sort Items by Groups Respecting Dependencies 1203
+782 Build a Matrix With Conditions 2392
+783 Find Eventual Safe States 802
+784 Loud and Rich 851
+785 Strange Printer II 1591
+786 Course Schedule with Prerequisites 207
+787 Alien Dictionary — Detect Invalid Ordering 269
+788 Topological Ordering with Multiple Valid Answers —
+789 Detect Cycle in Directed Graph using DFS —
+790 Detect Cycle in Directed Graph using Kahn's Algorithm —
+STRONGLY CONNECTED COMPONENTS (SCC)
+791 Implement Kosaraju's Algorithm —
+792 Implement Tarjan's Algorithm for SCC —
+793 Find Strongly Connected Components in a Directed Graph —
+794 Number of Strongly Connected Components —
+795 Course Schedule 207
+796 Course Schedule II 210
+797 Find Eventual Safe States 802
+798 Critical Connections in a Network 1192
+799 Minimum Number of Vertices to Reach All Nodes 1557
+800 Reorder Routes to Make All Paths Lead to the City Zero 1466
+801 Longest Cycle in a Graph 2360
+802 Maximum Employees to Be Invited to a Meeting 2127
+803 2-SAT / Satisfiability of Boolean Constraints using SCC —
+804 Condensation Graph Construction —
+805 SCC-based Reachability —
+806 SCC + Topological Sort —
+DYNAMIC PROGRAMMING: 1D DP
+807 Climbing Stairs 70
+808 Min Cost Climbing Stairs 746
+809 House Robber 198
+810 House Robber II 213
+811 Decode Ways 91
+812 Word Break 139
+813 Maximum Subarray 53
+814 Maximum Product Subarray 152
+815 Longest Palindromic Substring 5
+816 Perfect Squares 279
+817 Integer Break 343
+818 Partition Equal Subset Sum 416
+819 Combination Sum IV 377
+820 Number of Ways to Stay in the Same Place 1269
+821 Solving Questions With Brainpower 2140
+822 Delete and Earn 740
+823 Paint House 256
+824 Paint Fence 276
+825 Maximum Alternating Subsequence Sum 1911
+826 Longest Arithmetic Subsequence 1027
+827 Arithmetic Slices 413
+828 Number of Longest Increasing Subsequence 673
+829 Decode Ways II 639
+830 Jump Game 55
+831 Jump Game II 45
+832 Jump Game VII 1871
+833 Best Time to Buy and Sell Stock with Cooldown 309
+834 Best Time to Buy and Sell Stock III 123
+835 Best Time to Buy and Sell Stock IV 188
+836 Best Time to Buy and Sell Stock with Transaction Fee 714
+837 Longest Valid Parentheses 32
+838 Count Ways to Build Good Strings 2466
+839 Minimum Cost For Tickets 983
+840 Triangle 120
+841 Minimum Falling Path Sum 931
+DYNAMIC PROGRAMMING: 2D DP
+842 Unique Paths 62
+843 Unique Paths II 63
+844 Minimum Path Sum 64
+845 Triangle 120
+846 Minimum Falling Path Sum 931
+847 Maximal Square 221
+848 Maximal Rectangle 85
+849 Dungeon Game 174
+850 Cherry Pickup 741
+851 Cherry Pickup II 1463
+852 Longest Increasing Path in a Matrix 329
+853 Longest Common Subsequence 1143
+854 Edit Distance 72
+855 Distinct Subsequences 115
+856 Interleaving String 97
+857 Longest Palindromic Subsequence 516
+858 Palindromic Substrings 647
+859 Shortest Common Supersequence 1092
+860 Minimum ASCII Delete Sum for Two Strings 712
+861 Regular Expression Matching 10
+862 Wildcard Matching 44
+863 0/1 Knapsack —
+864 Subset Sum —
+865 Partition Equal Subset Sum 416
+866 Target Sum 494
+867 Ones and Zeroes 474
+868 Last Stone Weight II 1049
+869 Best Time to Buy and Sell Stock with Cooldown 309
+870 Best Time to Buy and Sell Stock III 123
+871 Best Time to Buy and Sell Stock IV 188
+0/1 KNAPSACK
+872 0/1 Knapsack —
+873 Subset Sum —
+874 Equal Sum Partition —
+875 Partition Equal Subset Sum 416
+876 Target Sum 494
+877 Ones and Zeroes 474
+878 Last Stone Weight II 1049
+879 Count of Subsets with Given Sum —
+880 Count the Number of Subsets with Difference K —
+881 Minimum Subset Sum Difference —
+882 0/1 Knapsack with Exact Weight —
+883 Maximum Value with Limited Capacity —
+884 Minimum Number of Items for Target Weight —
+885 Can Partition Array Into Two Equal Sum Subsets —
+886 Tallest Billboard 956
+887 Profitable Schemes 879
+888 Shopping Offers 638
+889 Number of Ways to Reach a Target Sum —
+890 Maximum Subset Sum with No Adjacent Elements —
+UNBOUNDED KNAPSACK
+891 Unbounded Knapsack —
+892 Rod Cutting —
+893 Coin Change 322
+894 Coin Change II 518
+895 Combination Sum IV 377
+896 Perfect Squares 279
+897 Minimum Coins to Make a Given Amount —
+898 Maximum Ribbon Cut —
+899 Integer Break 343
+900 Minimum Cost to Cut a Rod —
+901 Number of Ways to Reach a Target Sum —
+902 Coin Change with Limited/Unlimited Usage Variations —
+903 Maximum Value with Unlimited Items —
+904 Count Ways to Achieve a Target Sum —
+905 Combination Sum 39
+906 Combination Sum II 40
+907 Minimum Cost For Tickets 983
+908 Count Ways to Climb Stairs with Variable Steps —
+909 Minimum Number of Perfect Squares 279
+910 Coin Change with Multiple Denominations —
+LCS (LONGEST COMMON SUBSEQUENCE)
+911 Longest Common Subsequence 1143
+912 Longest Common Substring —
+913 Longest Palindromic Subsequence 516
+914 Shortest Common Supersequence 1092
+915 Print/Reconstruct the LCS —
+916 Longest Repeating Subsequence —
+917 Minimum Deletions to Make Two Strings Equal —
+918 Delete Operation for Two Strings 583
+919 Minimum ASCII Delete Sum for Two Strings 712
+920 Edit Distance 72
+921 Distinct Subsequences 115
+922 Interleaving String 97
+923 Wildcard Matching 44
+924 Regular Expression Matching 10
+925 Longest Palindromic Substring 5
+926 Palindromic Substrings 647
+927 Minimum Insertions to Make a String Palindrome 1312
+928 Minimum Deletions to Make a String Palindrome —
+929 Longest Common Subsequence of Three Strings —
+930 Shortest Common Supersequence Reconstruction 1092
+LIS (LONGEST INCREASING SUBSEQUENCE)
+931 Longest Increasing Subsequence 300
+932 Longest Decreasing Subsequence —
+933 Longest Bitonic Subsequence —
+934 Number of Longest Increasing Subsequences 673
+935 Russian Doll Envelopes 354
+936 Maximum Length of Pair Chain 646
+937 Longest Divisible Subset 368
+938 Minimum Number of Removals to Make Mountain Array 1671
+939 Minimum Deletions to Make Array Sorted —
+940 Maximum Sum Increasing Subsequence —
+941 Longest Alternating Subsequence —
+942 Longest Arithmetic Subsequence 1027
+943 Longest Arithmetic Subsequence of Given Difference 1218
+944 Arithmetic Slices 413
+945 Largest Divisible Subset 368
+946 Longest String Chain 1048
+947 Number of Matching Subsequences 792
+948 Maximum Length of Repeated Subarray 718
+949 Maximum Sum of 3 Non-Overlapping Subarrays 689
+950 Russian Doll Envelopes — Optimized LIS 354
+INTERVAL DP
+951 Matrix Chain Multiplication —
+952 Burst Balloons 312
+953 Minimum Cost to Cut a Stick 1547
+954 Palindrome Partitioning II 132
+955 Strange Printer 664
+956 Minimum Score Triangulation of Polygon 1039
+957 Stone Game 877
+958 Stone Game II 1140
+959 Stone Game III 1406
+960 Predict the Winner 486
+961 Minimum Cost Tree From Leaf Values 1130
+962 Remove Boxes 546
+963 Strange Printer II 1591
+964 Minimum Cost to Merge Stones 1000
+965 Optimal Binary Search Tree —
+966 Boolean Parenthesization —
+967 Palindrome Partitioning 131
+968 Longest Palindromic Subsequence 516
+969 Minimum Insertions to Make a String Palindrome 1312
+970 Parsing a Boolean Expression 1106
+TREE DP
+971 House Robber III 337
+972 Diameter of Binary Tree 543
+973 Binary Tree Maximum Path Sum 124
+974 Binary Tree Cameras 968
+975 Longest ZigZag Path in a Binary Tree 1372
+976 Maximum Independent Set in a Tree —
+977 Tree Matching / Maximum Matching —
+978 Minimum Vertex Cover in a Tree —
+979 Maximum Path Sum in a Binary Tree 124
+980 Longest Path in a Tree —
+981 Sum of Distances in Tree 834
+982 Time Needed to Inform All Employees 1376
+983 All Possible Full Binary Trees 894
+984 Unique Binary Search Trees 96
+985 Unique Binary Search Trees II 95
+986 House Robber III with State DP 337
+987 Maximum Difference Between Node and Ancestor 1026
+988 Distribute Coins in Binary Tree 979
+989 Longest Univalue Path 687
+990 Smallest Sufficient Team 1125
+991 Number of Ways to Reorder Array to Get Same BST 1569
+992 Binary Tree Coloring Game 1145
+993 Maximum Sum BST in Binary Tree 1373
+994 Tree Diameter with Weighted Edges —
+995 Rerooting DP on Trees —
+BITMASK DP
+996 Bitmask Basics: Set/Clear/Toggle/Check a Bit —
+997 Count Set Bits 191
+998 Power Set / Generate All Subsets 78
+999 Subsets II using Bitmask 90
+1000 Single Number 136
+1001 Single Number II 137
+1002 Maximum XOR for Each Query 1829
+1003 Maximum Product of Word Lengths 318
+1004 Maximum Compatibility Score Sum 1947
+1005 Smallest Sufficient Team 1125
+1006 Traveling Salesman Problem (TSP) —
+1007 Assignment Problem using Bitmask DP —
+1008 Minimum Cost to Assign Jobs —
+1009 Partition Array into K Equal Sum Subsets 698
+1010 Matchsticks to Square 473
+1011 Maximum Students Taking Exam 1349
+1012 Minimum Number of Work Sessions 1986
+1013 Parallel Courses II 1494
+1014 Shortest Path Visiting All Nodes 847
+1015 Number of Ways to Wear Different Hats to Each Other 1434
+1016 Minimum XOR Sum of Two Arrays 1879
+1017 Maximum AND Sum of Array 2172
+1018 Can I Win 464
+1019 Matchsticks to Square — Bitmask DP 473
+1020 Count Special Subsequences using Bitmask —
+TRIES
+1021 Implement Trie (Prefix Tree) 208
+1022 Design Add and Search Words Data Structure 211
+1023 Word Search II 212
+1024 Replace Words 648
+1025 Longest Word in Dictionary 720
+1026 Prefix and Suffix Search 745
+1027 Map Sum Pairs 677
+1028 Search Suggestions System 1268
+1029 Maximum XOR of Two Numbers in an Array 421
+1030 Maximum XOR With an Element From Array 1707
+1031 Concatenated Words 472
+1032 Implement Magic Dictionary 676
+1033 Stream of Characters 1032
+1034 Design Search Autocomplete System 642
+BIT MANIPULATION
+1035 Single Number 136
+1036 Number of 1 Bits 191
+1037 Counting Bits 338
+1038 Power of Two 231
+1039 Missing Number 268
+1040 Reverse Bits 190
+1041 Single Number II 137
+1042 Single Number III 260
+1043 Sum of Two Integers 371
+1044 Bitwise AND of Numbers Range 201
+1045 Subsets 78
+1046 Subsets II 90
+1047 Power Set using Bitmask —
+1048 Find XOR of All Numbers —
+1049 Maximum XOR of Two Numbers 421
+1050 Maximum XOR With an Element From Array 1707
+1051 Minimum Bit Flips to Convert Number 2220
+1052 Minimum One Bit Operations to Make Integers Zero 1611
+1053 UTF-8 Validation 393
+1054 Divide Two Integers 29
+1055 XOR Queries of a Subarray 1310

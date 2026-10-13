@@ -24,10 +24,11 @@
   const secBtnVerbal = document.getElementById('sec-btn-verbal');
   const secBtnDsa1 = document.getElementById('sec-btn-dsa1');
   const secBtnDsa2 = document.getElementById('sec-btn-dsa2');
+  const secBtnDsa3 = document.getElementById('sec-btn-dsa3');
   const secBtnGeneral = document.getElementById('sec-btn-general');
 
-  let currentSection = 'important'; // 'important' | 'methods' | 'mnc' | 'python-oop' | 'sql' | 'verbal' | 'dsa1' | 'dsa2' | 'general'
-  let currentView = 'important-home'; // 'important-home' | 'methods-home' | 'home' | 'company' | 'question' | 'py-home' | 'py-concept' | 'sql-home' | 'verbal-home' | 'dsa1-home' | 'dsa2-home' | 'general-home'
+  let currentSection = 'important'; // 'important' | 'methods' | 'mnc' | 'python-oop' | 'sql' | 'verbal' | 'dsa1' | 'dsa2' | 'dsa3' | 'general'
+  let currentView = 'important-home'; // 'important-home' | 'methods-home' | 'home' | 'company' | 'question' | 'py-home' | 'py-concept' | 'sql-home' | 'verbal-home' | 'dsa1-home' | 'dsa2-home' | 'dsa3-home' | 'general-home'
   let currentCompany = null;
   let currentQuestion = null;
   let currentConceptId = null;
@@ -35,7 +36,7 @@
   let sqlFilter = 'all';
   let verbalTab = 'rules'; // 'rules' | 'jumbles' | 'blanks' | 'completion' | 'vocab'
   let generalSubject = 'os'; // 'os' | 'dbms' | 'cn' | 'dsa' | 'oop' | 'aptitude' | 'hr'
-  let generalFilter = 'all'; // 'all' | 'theory' | 'faqs' | 'worksheets' | 'dsa1' | 'dsa2'
+  let generalFilter = 'all'; // 'all' | 'theory' | 'faqs' | 'worksheets' | 'dsa1' | 'dsa2' | 'dsa3'
   let searchTerm = '';
 
   // ── Most Important Code State ──
@@ -64,6 +65,17 @@
     if (savedDsa2) dsa2SolvedSet = new Set(JSON.parse(savedDsa2));
   } catch (e) {}
 
+  // ── DSA 3: 1055 Placement Practice Sheet State ──
+  let dsa3Category = 'all';
+  let dsa3Page = 1;
+  let dsa3PageSize = 50; // 50 | 100 | 'all'
+  let dsa3LcFilter = 'all'; // 'all' | 'lc' | 'standard'
+  let dsa3SolvedSet = new Set();
+  try {
+    const savedDsa3 = localStorage.getItem('dsa3_solved');
+    if (savedDsa3) dsa3SolvedSet = new Set(JSON.parse(savedDsa3));
+  } catch (e) {}
+
   // ── Theme Toggle ──
   themeToggle.addEventListener('click', () => {
     const t = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
@@ -80,6 +92,7 @@
   if (secBtnVerbal) secBtnVerbal.addEventListener('click', () => switchSection('verbal'));
   if (secBtnDsa1) secBtnDsa1.addEventListener('click', () => switchSection('dsa1'));
   if (secBtnDsa2) secBtnDsa2.addEventListener('click', () => switchSection('dsa2'));
+  if (secBtnDsa3) secBtnDsa3.addEventListener('click', () => switchSection('dsa3'));
   if (secBtnGeneral) secBtnGeneral.addEventListener('click', () => switchSection('general'));
 
   function switchSection(sec) {
@@ -95,6 +108,7 @@
     else if (sec === 'verbal') navigate('verbal-home');
     else if (sec === 'dsa1') navigate('dsa1-home');
     else if (sec === 'dsa2') navigate('dsa2-home');
+    else if (sec === 'dsa3') navigate('dsa3-home');
     else if (sec === 'general') navigate('general-home');
   }
 
@@ -107,6 +121,7 @@
     if (secBtnVerbal) secBtnVerbal.classList.toggle('active', currentSection === 'verbal');
     if (secBtnDsa1) secBtnDsa1.classList.toggle('active', currentSection === 'dsa1');
     if (secBtnDsa2) secBtnDsa2.classList.toggle('active', currentSection === 'dsa2');
+    if (secBtnDsa3) secBtnDsa3.classList.toggle('active', currentSection === 'dsa3');
     if (secBtnGeneral) secBtnGeneral.classList.toggle('active', currentSection === 'general');
   }
 
@@ -120,6 +135,7 @@
     else if (currentSection === 'verbal') navigate('verbal-home');
     else if (currentSection === 'dsa1') navigate('dsa1-home');
     else if (currentSection === 'dsa2') navigate('dsa2-home');
+    else if (currentSection === 'dsa3') navigate('dsa3-home');
     else navigate('general-home');
   });
   backBtn.addEventListener('click', goBack);
@@ -156,6 +172,8 @@
       currentSection = 'dsa1';
     } else if (view === 'dsa2-home') {
       currentSection = 'dsa2';
+    } else if (view === 'dsa3-home') {
+      currentSection = 'dsa3';
     } else if (view === 'general-home') {
       currentSection = 'general';
     }
@@ -169,18 +187,19 @@
     if (currentView === 'question') navigate('company', currentCompany);
     else if (currentView === 'company') navigate('home');
     else if (currentView === 'py-concept') navigate('py-home');
-    else if (currentView === 'home' || currentView === 'methods-home' || currentView === 'py-home' || currentView === 'sql-home' || currentView === 'verbal-home' || currentView === 'dsa1-home' || currentView === 'dsa2-home' || currentView === 'general-home') switchSection('important');
+    else if (currentView === 'home' || currentView === 'methods-home' || currentView === 'py-home' || currentView === 'sql-home' || currentView === 'verbal-home' || currentView === 'dsa1-home' || currentView === 'dsa2-home' || currentView === 'dsa3-home' || currentView === 'general-home') switchSection('important');
   }
 
   // ── Search ──
   searchInput.addEventListener('input', (e) => {
     searchTerm = e.target.value.toLowerCase().trim();
+    if (currentView === 'dsa3-home') dsa3Page = 1; // reset page on search
     render();
   });
 
   // ── Render Dispatcher ──
   function render() {
-    backBtn.classList.toggle('hidden', currentView === 'important-home' || currentView === 'methods-home' || currentView === 'home' || currentView === 'py-home' || currentView === 'sql-home' || currentView === 'verbal-home' || currentView === 'dsa1-home' || currentView === 'dsa2-home' || currentView === 'general-home');
+    backBtn.classList.toggle('hidden', currentView === 'important-home' || currentView === 'methods-home' || currentView === 'home' || currentView === 'py-home' || currentView === 'sql-home' || currentView === 'verbal-home' || currentView === 'dsa1-home' || currentView === 'dsa2-home' || currentView === 'dsa3-home' || currentView === 'general-home');
     updateBreadcrumb();
 
     if (currentView === 'important-home') renderImportantHome();
@@ -194,6 +213,7 @@
     else if (currentView === 'verbal-home') renderVerbalHome();
     else if (currentView === 'dsa1-home') renderDsa1Home();
     else if (currentView === 'dsa2-home') renderDsa2Home();
+    else if (currentView === 'dsa3-home') renderDsa3Home();
     else if (currentView === 'general-home') renderGeneralHome();
   }
 
@@ -238,6 +258,8 @@
       html += '<span class="sep"> / </span><span class="crumb active">DSA 1: 18 Patterns</span>';
     } else if (currentSection === 'dsa2') {
       html += '<span class="sep"> / </span><span class="crumb active">DSA 2: 90-Day Roadmap (150 Qs)</span>';
+    } else if (currentSection === 'dsa3') {
+      html += '<span class="sep"> / </span><span class="crumb active">DSA 3: Practice Sheet (1055 Qs)</span>';
     } else if (currentSection === 'general') {
       html += '<span class="sep"> / </span><span class="crumb active">General Placement Hub</span>';
     }
@@ -2130,6 +2152,303 @@
   };
 
   // ============================================================
+  // ── 4C. DSA 3: COMPREHENSIVE PLACEMENT PRACTICE SHEET (1055 Qs) ──
+  // ============================================================
+  function renderDsa3Home() {
+    if (typeof DSA3_SHEET_DATA === 'undefined') {
+      app.innerHTML = '<div class="no-results"><p>DSA 3 Practice Sheet dataset not loaded.</p></div>';
+      return;
+    }
+
+    const allItems = DSA3_SHEET_DATA;
+    const categories = typeof DSA3_CATEGORIES !== 'undefined' ? DSA3_CATEGORIES : [];
+    const totalCount = allItems.length; // 1055
+    const solvedCount = allItems.filter(item => dsa3SolvedSet.has(item.id)).length;
+    const pct = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
+
+    const lcCount = allItems.filter(i => i.lc !== null).length;
+    const standardCount = allItems.filter(i => i.lc === null).length;
+
+    // Filter items
+    let filtered = allItems;
+    if (dsa3Category !== 'all') {
+      filtered = filtered.filter(item => item.cat === dsa3Category);
+    }
+    if (dsa3LcFilter === 'lc') {
+      filtered = filtered.filter(item => item.lc !== null);
+    } else if (dsa3LcFilter === 'standard') {
+      filtered = filtered.filter(item => item.lc === null);
+    }
+    if (searchTerm) {
+      filtered = filtered.filter(item =>
+        item.title.toLowerCase().includes(searchTerm) ||
+        item.cat.toLowerCase().includes(searchTerm) ||
+        (item.lc && String(item.lc).includes(searchTerm)) ||
+        String(item.id).includes(searchTerm)
+      );
+    }
+
+    // Pagination calculations
+    const filteredTotal = filtered.length;
+    let paginatedItems = filtered;
+    let totalPages = 1;
+    if (dsa3PageSize !== 'all') {
+      const size = parseInt(dsa3PageSize, 10);
+      totalPages = Math.max(1, Math.ceil(filteredTotal / size));
+      if (dsa3Page > totalPages) dsa3Page = 1;
+      const startIdx = (dsa3Page - 1) * size;
+      paginatedItems = filtered.slice(startIdx, startIdx + size);
+    }
+
+    app.innerHTML = `
+      <div class="home-hero animate-in">
+        <h1>DSA 3: Placement <span class="gradient">Practice Sheet</span></h1>
+        <p>Comprehensive 1055-Problem Placement Master Sheet across 43 Core Topic Verticals • Arrays to Advanced DP & Graphs • Track & Solve</p>
+        <div class="stats-row">
+          <div class="stat-pill"><i class="ri-booklet-line"></i> <span class="num">${totalCount}</span> Curated Problems</div>
+          <div class="stat-pill"><i class="ri-folder-line"></i> <span class="num">${categories.length}</span> Topic Categories</div>
+          <div class="stat-pill"><i class="ri-checkbox-circle-line"></i> <span class="num" id="dsa3-stat-solved">${solvedCount} / ${totalCount}</span> Solved (${pct}%)</div>
+          <div class="stat-pill"><i class="ri-code-box-line"></i> <span class="num">${lcCount}</span> LeetCode Problems</div>
+        </div>
+      </div>
+
+      <!-- Dynamic Progress Card -->
+      <div class="dsa3-progress-card animate-in delay-1">
+        <div class="progress-header-flex">
+          <div>
+            <h3 style="margin: 0; font-size: 1.25rem; color: #fff; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="ri-trophy-line" style="color: #f59e0b;"></i> 1055-Problem Placement Progress Tracker
+            </h3>
+            <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--text-secondary);">
+              Check off problems as you practice. Your solved states persist automatically in localStorage.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button class="filter-chip" onclick="resetDsa3Progress()" style="border: 1px solid rgba(248, 113, 113, 0.4); background: rgba(248, 113, 113, 0.1); color: #f87171;">
+              <i class="ri-restart-line"></i> Reset Progress
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-track-outer">
+          <div class="dsa3-progress-inner" id="dsa3-progress-fill" style="width: ${pct}%;"></div>
+        </div>
+
+        <div class="roadmap-stat-pills">
+          <span class="stat-chip">
+            <i class="ri-checkbox-circle-fill" style="color: #10b981;"></i>
+            Total Solved: <strong id="dsa3-stat-count">${solvedCount} / ${totalCount}</strong>
+          </span>
+          <span class="stat-chip">
+            <i class="ri-pie-chart-line" style="color: #f59e0b;"></i>
+            Completion: <strong id="dsa3-stat-pct">${pct}%</strong>
+          </span>
+          <span class="stat-chip">
+            <i class="ri-code-line" style="color: #38bdf8;"></i>
+            LeetCode Problems: <strong>${lcCount}</strong>
+          </span>
+          <span class="stat-chip">
+            <i class="ri-compass-3-line" style="color: #a855f7;"></i>
+            Conceptual / Core: <strong>${standardCount}</strong>
+          </span>
+        </div>
+      </div>
+
+      <!-- Controls: Category & Type Filter -->
+      <div class="section-title-bar" style="margin-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h2><i class="ri-filter-3-line"></i> Filter by Topic & Problem Type</h2>
+            <span class="subtitle">Select any of 43 topic categories or search problem keywords</span>
+          </div>
+          <span class="q-acc-cat" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-size: 0.85rem; font-weight: 600; padding: 0.35rem 0.75rem;">
+            Showing ${filteredTotal} of ${totalCount} Problems
+          </span>
+        </div>
+      </div>
+
+      <!-- Type Filter (All, LeetCode, Standard) -->
+      <div class="py-nav-filter animate-in delay-2" style="margin-bottom: 0.75rem;">
+        <button class="filter-chip ${dsa3LcFilter === 'all' ? 'active' : ''}" onclick="setDsa3LcFilter('all')">
+          All Types (${totalCount})
+        </button>
+        <button class="filter-chip ${dsa3LcFilter === 'lc' ? 'active' : ''}" onclick="setDsa3LcFilter('lc')" style="color: #fbbf24;">
+          <i class="ri-code-box-line"></i> LeetCode Qs (${lcCount})
+        </button>
+        <button class="filter-chip ${dsa3LcFilter === 'standard' ? 'active' : ''}" onclick="setDsa3LcFilter('standard')" style="color: #94a3b8;">
+          <i class="ri-terminal-window-line"></i> Standard / Conceptual (${standardCount})
+        </button>
+      </div>
+
+      <!-- Categories Pills (Scrollable / Wrap) -->
+      <div class="py-nav-filter animate-in delay-2" style="flex-wrap: wrap; margin-bottom: 1.5rem; max-height: 240px; overflow-y: auto; padding: 0.5rem; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid var(--border-color);">
+        <button class="filter-chip ${dsa3Category === 'all' ? 'active' : ''}" onclick="setDsa3Category('all')">
+          All Categories (${totalCount})
+        </button>
+        ${categories.map(c => {
+          const count = allItems.filter(item => item.cat === c).length;
+          return `
+            <button class="filter-chip ${dsa3Category === c ? 'active' : ''}" onclick="setDsa3Category('${escapeHtml(c)}')">
+              ${escapeHtml(c)} (${count})
+            </button>
+          `;
+        }).join('')}
+      </div>
+
+      <!-- Page Size Selector & Pagination Bar -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+          <span>Per Page:</span>
+          <button class="filter-chip ${dsa3PageSize === 50 ? 'active' : ''}" onclick="setDsa3PageSize(50)" style="padding: 0.2rem 0.55rem; font-size: 0.8rem;">50</button>
+          <button class="filter-chip ${dsa3PageSize === 100 ? 'active' : ''}" onclick="setDsa3PageSize(100)" style="padding: 0.2rem 0.55rem; font-size: 0.8rem;">100</button>
+          <button class="filter-chip ${dsa3PageSize === 'all' ? 'active' : ''}" onclick="setDsa3PageSize('all')" style="padding: 0.2rem 0.55rem; font-size: 0.8rem;">Show All</button>
+        </div>
+        ${dsa3PageSize !== 'all' && totalPages > 1 ? `
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">
+            Page <strong>${dsa3Page}</strong> of <strong>${totalPages}</strong>
+          </div>
+        ` : ''}
+      </div>
+
+      <!-- Practice Sheet Table -->
+      <div class="dsa3-table-wrap animate-in delay-3">
+        <div class="dsa3-row dsa3-header-row">
+          <div style="text-align: center;">Done</div>
+          <div>Sr. #</div>
+          <div>Problem Title</div>
+          <div>LeetCode</div>
+          <div>Category / Topic</div>
+          <div style="text-align: right;">Action</div>
+        </div>
+
+        ${paginatedItems.map(item => {
+          const isSolved = dsa3SolvedSet.has(item.id);
+          return `
+            <div class="dsa3-row ${isSolved ? 'solved' : ''}" id="dsa3-row-${item.id}">
+              <div class="dsa-checkbox-wrap">
+                <input type="checkbox" class="dsa-checkbox" ${isSolved ? 'checked' : ''} onchange="toggleDsa3Solved(${item.id})" title="Mark solved" />
+              </div>
+              <div><span class="day-badge" style="background: rgba(245, 158, 11, 0.12); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3);">#${item.id}</span></div>
+              <div class="dsa3-prob-title">
+                <span>${escapeHtml(item.title)}</span>
+              </div>
+              <div>
+                ${item.lc ? `
+                  <span class="lc-num-badge">LC #${item.lc}</span>
+                ` : `
+                  <span class="lc-num-badge standard">Core / GFG</span>
+                `}
+              </div>
+              <div>
+                <span class="dsa3-cat-tag" title="${escapeHtml(item.cat)}">${escapeHtml(item.cat)}</span>
+              </div>
+              <div style="text-align: right;">
+                <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="lc-open-btn" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3);">
+                  <i class="ri-external-link-line"></i> ${item.lc ? 'Solve' : 'Practice'}
+                </a>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+
+      <!-- Pagination Buttons -->
+      ${dsa3PageSize !== 'all' && totalPages > 1 ? `
+        <div class="dsa3-pagination animate-in delay-3">
+          <button class="page-btn" onclick="setDsa3Page(${dsa3Page - 1})" ${dsa3Page <= 1 ? 'disabled' : ''}>
+            <i class="ri-arrow-left-s-line"></i> Prev
+          </button>
+          ${Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter(p => p === 1 || p === totalPages || Math.abs(p - dsa3Page) <= 2)
+            .map((p, idx, arr) => {
+              const prev = arr[idx - 1];
+              const ellipsis = prev && p - prev > 1 ? '<span style="color: var(--text-muted); padding: 0 0.3rem;">...</span>' : '';
+              return `
+                ${ellipsis}
+                <button class="page-btn ${dsa3Page === p ? 'active' : ''}" onclick="setDsa3Page(${p})">${p}</button>
+              `;
+            }).join('')}
+          <button class="page-btn" onclick="setDsa3Page(${dsa3Page + 1})" ${dsa3Page >= totalPages ? 'disabled' : ''}>
+            Next <i class="ri-arrow-right-s-line"></i>
+          </button>
+        </div>
+      ` : ''}
+
+      ${filtered.length === 0 ? `
+        <div class="no-results"><i class="ri-search-line"></i><p>No practice problems found matching current search or filters.</p></div>
+      ` : ''}
+    `;
+  }
+
+  // ── DSA 3 Interactive Global Handlers ──
+  window.setDsa3Category = function(cat) {
+    dsa3Category = cat;
+    dsa3Page = 1;
+    renderDsa3Home();
+  };
+
+  window.setDsa3Page = function(page) {
+    dsa3Page = page;
+    renderDsa3Home();
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  };
+
+  window.setDsa3PageSize = function(size) {
+    dsa3PageSize = size;
+    dsa3Page = 1;
+    renderDsa3Home();
+  };
+
+  window.setDsa3LcFilter = function(filter) {
+    dsa3LcFilter = filter;
+    dsa3Page = 1;
+    renderDsa3Home();
+  };
+
+  window.toggleDsa3Solved = function(id) {
+    const numId = parseInt(id, 10);
+    if (dsa3SolvedSet.has(numId)) {
+      dsa3SolvedSet.delete(numId);
+    } else {
+      dsa3SolvedSet.add(numId);
+    }
+    try {
+      localStorage.setItem('dsa3_solved', JSON.stringify([...dsa3SolvedSet]));
+    } catch(e) {}
+
+    const row = document.getElementById('dsa3-row-' + numId);
+    if (row) {
+      row.classList.toggle('solved', dsa3SolvedSet.has(numId));
+    }
+
+    if (typeof DSA3_SHEET_DATA !== 'undefined') {
+      const totalCount = DSA3_SHEET_DATA.length;
+      const solvedCount = DSA3_SHEET_DATA.filter(item => dsa3SolvedSet.has(item.id)).length;
+      const pct = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
+
+      const fill = document.getElementById('dsa3-progress-fill');
+      if (fill) fill.style.width = pct + '%';
+      const statSolved = document.getElementById('dsa3-stat-solved');
+      if (statSolved) statSolved.textContent = `${solvedCount} / ${totalCount}`;
+      const statCount = document.getElementById('dsa3-stat-count');
+      if (statCount) statCount.textContent = `${solvedCount} / ${totalCount}`;
+      const statPct = document.getElementById('dsa3-stat-pct');
+      if (statPct) statPct.textContent = pct + '%';
+    }
+  };
+
+  window.resetDsa3Progress = function() {
+    if (confirm("Are you sure you want to reset your solved progress for the 1055-Problem Practice Sheet?")) {
+      dsa3SolvedSet.clear();
+      try {
+        localStorage.removeItem('dsa3_solved');
+      } catch(e) {}
+      renderDsa3Home();
+    }
+  };
+
+  // ============================================================
   // ── 5. GENERAL PLACEMENT HUB (SUBJECT-WISE THEORY & FAQS) ──
   // ============================================================
   function renderGeneralHome() {
@@ -2524,6 +2843,9 @@
           <button class="filter-chip" onclick="switchSection('dsa2')" style="border: 1px solid rgba(236, 72, 153, 0.4); background: rgba(236, 72, 153, 0.15); color: #f472b6; font-weight: 700;">
             <i class="ri-road-map-line"></i> DSA 2: 90-Day Roadmap (150 Qs)
           </button>
+          <button class="filter-chip" onclick="switchSection('dsa3')" style="border: 1px solid rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-weight: 700;">
+            <i class="ri-fire-line"></i> DSA 3: Practice Sheet (1055 Qs)
+          </button>
         ` : ''}
         <button class="filter-chip ${generalFilter === 'all' ? 'active' : ''}" data-subj-filter="all">
           All Content (${currentSubj.cheatSheet.length + currentSubj.faqs.length + (currentSubj.worksheets ? currentSubj.worksheets.length : 0)})
@@ -2568,6 +2890,20 @@
             </p>
             <button class="filter-chip" onclick="switchSection('dsa2')" style="background: #ec4899; color: #fff; font-weight: 700; width: 100%; justify-content: center;">
               <i class="ri-arrow-right-line"></i> Open 90-Day Roadmap
+            </button>
+          </div>
+
+          <div class="concept-content-block" style="border-left: 4px solid #f59e0b; margin-bottom: 0; padding: 1.25rem; background: linear-gradient(135deg, rgba(22, 27, 34, 0.8), rgba(60, 45, 15, 0.4));">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="q-acc-cat" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; font-weight: 700;">43 Topics • 1055 Qs</span>
+              <span style="font-size: 0.8rem; color: #f59e0b;"><i class="ri-fire-line"></i> Placement Master Sheet</span>
+            </div>
+            <h3 style="margin: 0 0 0.4rem; font-size: 1.15rem; color: #fff;">DSA 3: Placement Practice Sheet</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">
+              Comprehensive 1,055-problem placement practice sheet covering 43 topics from Arrays, Trees, Heaps, Graphs, DP to Bitmask & Tries with live search, topic filtering, and progress tracking.
+            </p>
+            <button class="filter-chip" onclick="switchSection('dsa3')" style="background: #f59e0b; color: #000; font-weight: 700; width: 100%; justify-content: center;">
+              <i class="ri-arrow-right-line"></i> Open 1055 Practice Sheet
             </button>
           </div>
         </div>
