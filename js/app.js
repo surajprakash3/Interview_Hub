@@ -34,6 +34,21 @@
   let currentConceptId = null;
   let pyFilter = 'all';
   let sqlFilter = 'all';
+  let sqlTab = 'mcq'; // 'mcq' | 'queries'
+  let sqlModuleFilter = 'all'; // 'all' | 1 | 2 | 3
+  let sqlStatusFilter = 'all'; // 'all' | 'unattempted' | 'correct' | 'wrong'
+  let sqlSchemaExpanded = false;
+  let sqlUserAnswers = {};
+  try {
+    const savedSqlMcq = localStorage.getItem('sql_mcq_progress');
+    if (savedSqlMcq) sqlUserAnswers = JSON.parse(savedSqlMcq);
+  } catch (e) {}
+
+  function saveSqlMcqProgress() {
+    try {
+      localStorage.setItem('sql_mcq_progress', JSON.stringify(sqlUserAnswers));
+    } catch (e) {}
+  }
   let verbalTab = 'rules'; // 'rules' | 'jumbles' | 'blanks' | 'completion' | 'vocab'
   let generalSubject = 'os'; // 'os' | 'dbms' | 'cn' | 'dsa' | 'oop' | 'aptitude' | 'hr'
   let generalFilter = 'all'; // 'all' | 'theory' | 'faqs' | 'worksheets' | 'dsa1' | 'dsa2' | 'dsa3'
@@ -1323,11 +1338,45 @@
   // ============================================================
   // ── 3. SQL TUTORIALS & QUERIES SECTION RENDERERS ──
   // ============================================================
-  function renderSqlHome() {
-    let filteredQueries = SQL_DATA.queries;
+  function updateSqlDashboard() {
+    if (!window.SQL_MCQ_DATA || !window.SQL_MCQ_DATA.questions) return;
+    const total = SQL_MCQ_DATA.questions.length;
+    const attemptedKeys = Object.keys(sqlUserAnswers).filter(k => sqlUserAnswers[k] && sqlUserAnswers[k].selectedText !== null);
+    const attempted = attemptedKeys.length;
+    const correct = attemptedKeys.filter(k => sqlUserAnswers[k].isCorrect === true).length;
+    const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+    const pct = Math.round((attempted / total) * 100);
 
+    const attemptedEl = document.getElementById('sql-stat-attempted');
+    const correctEl = document.getElementById('sql-stat-correct');
+    const accuracyEl = document.getElementById('sql-stat-accuracy');
+    const progressFill = document.getElementById('sql-progress-fill');
+    const progressText = document.getElementById('sql-progress-pct-text');
+
+    if (attemptedEl) attemptedEl.textContent = `${attempted} / ${total}`;
+    if (correctEl) correctEl.textContent = correct;
+    if (accuracyEl) accuracyEl.textContent = `${accuracy}%`;
+    if (progressFill) progressFill.style.width = `${pct}%`;
+    if (progressText) progressText.textContent = `${pct}% Completed`;
+  }
+
+  function renderSqlHome() {
+    const isMcqMode = (sqlTab === 'mcq');
+
+    let mcqQuestions = (window.SQL_MCQ_DATA && window.SQL_MCQ_DATA.questions) ? window.SQL_MCQ_DATA.questions : [];
+    let filteredQueries = (window.SQL_DATA && window.SQL_DATA.queries) ? window.SQL_DATA.queries : [];
+
+    // Filter MCQs
     if (searchTerm) {
-      filteredQueries = SQL_DATA.queries.filter(q =>
+      mcqQuestions = mcqQuestions.filter(q =>
+        q.title.toLowerCase().includes(searchTerm) ||
+        q.prompt.toLowerCase().includes(searchTerm) ||
+        (q.code && q.code.toLowerCase().includes(searchTerm)) ||
+        q.concept.toLowerCase().includes(searchTerm) ||
+        q.options.some(opt => opt.toLowerCase().includes(searchTerm))
+      );
+
+      filteredQueries = filteredQueries.filter(q =>
         q.question.toLowerCase().includes(searchTerm) ||
         q.sql.toLowerCase().includes(searchTerm) ||
         q.category.toLowerCase().includes(searchTerm) ||
@@ -1335,110 +1384,385 @@
       );
     }
 
+    if (sqlModuleFilter !== 'all') {
+      const modNum = parseInt(sqlModuleFilter, 10);
+      mcqQuestions = mcqQuestions.filter(q => q.moduleId === modNum);
+    }
+
+    if (sqlStatusFilter !== 'all') {
+      mcqQuestions = mcqQuestions.filter(q => {
+        const ans = sqlUserAnswers[q.id];
+        if (sqlStatusFilter === 'unattempted') return !ans || ans.selectedText === null;
+        if (sqlStatusFilter === 'correct') return ans && ans.isCorrect === true;
+        if (sqlStatusFilter === 'wrong') return ans && ans.isCorrect === false;
+        return true;
+      });
+    }
+
     if (sqlFilter !== 'all') {
       filteredQueries = filteredQueries.filter(q => q.category.toLowerCase() === sqlFilter.toLowerCase());
     }
 
     const categories = Array.from(new Set(SQL_DATA.queries.map(q => q.category)));
+    const totalMcqs = (window.SQL_MCQ_DATA && window.SQL_MCQ_DATA.questions) ? window.SQL_MCQ_DATA.questions.length : 50;
+    const attemptedKeys = Object.keys(sqlUserAnswers).filter(k => sqlUserAnswers[k] && sqlUserAnswers[k].selectedText !== null);
+    const attemptedCount = attemptedKeys.length;
+    const correctCount = attemptedKeys.filter(k => sqlUserAnswers[k].isCorrect === true).length;
+    const accuracyPct = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
+    const progressPct = Math.round((attemptedCount / totalMcqs) * 100);
 
     app.innerHTML = `
       <div class="home-hero animate-in">
-        <h1>SQL Tutorials & <span class="gradient">Top 50 Queries</span></h1>
-        <p>Master real-world SQL interview queries based on EmployeeDetails & EmployeeSalary relational schemas.</p>
+        <h1>Advanced SQL Curriculum & <span class="gradient">50 Expert Scenarios</span></h1>
+        <p>Enterprise SQL Aggregations & Join Mechanics — Master GROUP BY, HAVING, and complex JOIN operations with interactive instant answer feedback and deep DBA relational engine concepts.</p>
         <div class="stats-row">
-          <div class="stat-pill"><i class="ri-table-line"></i> <span class="num">${SQL_DATA.tables.length}</span> Schema Tables</div>
-          <div class="stat-pill"><i class="ri-database-2-line"></i> <span class="num">${SQL_DATA.queries.length}</span> Interview Queries</div>
+          <div class="stat-pill"><i class="ri-checkbox-circle-line" style="color: #10b981;"></i> <span class="num">${totalMcqs}</span> Expert MCQs</div>
+          <div class="stat-pill"><i class="ri-database-2-line" style="color: #38bdf8;"></i> <span class="num">${SQL_DATA.queries.length}</span> Query Solutions</div>
+          <div class="stat-pill"><i class="ri-layout-masonry-line" style="color: #a855f7;"></i> <span class="num">3</span> Core Modules</div>
           <div class="stat-pill"><i class="ri-terminal-window-line"></i> <span class="num">ANSI</span> SQL Standard</div>
         </div>
       </div>
 
-      <div class="section-title-bar animate-in delay-1">
-        <h2><i class="ri-layout-masonry-line"></i> Database Schema Explorer</h2>
-        <span class="subtitle">Reference tables used across all queries</span>
+      <!-- Mode Switcher Tabs -->
+      <div class="sql-mode-tabs animate-in delay-1">
+        <button class="sql-mode-btn ${sqlTab === 'mcq' ? 'active' : ''}" data-sql-tab="mcq">
+          <i class="ri-question-answer-line"></i>
+          <span>50 Expert MCQ Masterclass</span>
+          <span class="badge highlight" style="font-size: 0.72rem;">50 Scenarios</span>
+        </button>
+        <button class="sql-mode-btn ${sqlTab === 'queries' ? 'active' : ''}" data-sql-tab="queries">
+          <i class="ri-code-box-line"></i>
+          <span>Top 50 Interview Queries</span>
+          <span class="badge" style="font-size: 0.72rem;">50 Queries</span>
+        </button>
       </div>
 
-      <div class="schema-grid animate-in delay-2">
-        ${SQL_DATA.tables.map(tbl => `
-          <div class="schema-card">
-            <div class="schema-header">
-              <h3><i class="ri-table-2"></i> ${escapeHtml(tbl.name)}</h3>
-              <span class="table-tag">TABLE</span>
+      ${sqlTab === 'mcq' ? `
+        <!-- ═══ MCQ MASTERCLASS VIEW ═══ -->
+
+        <!-- Live Quiz Score & Progress Dashboard -->
+        <div class="sql-progress-dashboard animate-in delay-1">
+          <div class="sql-progress-top">
+            <div class="sql-progress-stats">
+              <div class="sql-metric-badge">
+                <i class="ri-checkbox-circle-line" style="color: #38bdf8;"></i>
+                <span>Attempted: <strong id="sql-stat-attempted">${attemptedCount} / ${totalMcqs}</strong></span>
+              </div>
+              <div class="sql-metric-badge">
+                <i class="ri-check-line" style="color: #10b981;"></i>
+                <span>Correct: <strong id="sql-stat-correct" style="color: #10b981;">${correctCount}</strong></span>
+              </div>
+              <div class="sql-metric-badge">
+                <i class="ri-percent-line" style="color: #f59e0b;"></i>
+                <span>Accuracy: <strong id="sql-stat-accuracy">${accuracyPct}%</strong></span>
+              </div>
             </div>
-            <div class="schema-desc">${escapeHtml(tbl.description)}</div>
-            <div class="schema-table-wrap">
-              <table class="schema-table">
-                <thead>
-                  <tr>
-                    <th>Column</th>
-                    <th>Type</th>
-                    ${Object.keys(tbl.sampleRows[0] || {}).map(k => `<th>${escapeHtml(k)} (Sample)</th>`).join('')}
-                  </tr>
-                </thead>
-                <tbody>
-                  ${tbl.columns.map((col, idx) => `
-                    <tr>
-                      <td>
-                        <strong>${escapeHtml(col.name)}</strong>
-                        ${col.isKey ? '<span class="pk-badge">PK</span>' : ''}
-                      </td>
-                      <td><span class="sql-type">${escapeHtml(col.type)}</span></td>
-                      ${tbl.sampleRows.map(row => `<td>${escapeHtml(String(row[col.name] ?? ''))}</td>`).join('')}
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
+            <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+              <button class="mcq-reveal-btn" onclick="revealAllSqlConcepts()" title="Show All Explanations">
+                <i class="ri-eye-line"></i> Reveal All Concepts
+              </button>
+              <button class="mcq-reveal-btn" onclick="resetAllSqlMcqs()" style="border-color: rgba(239, 68, 68, 0.5); color: #f87171;" title="Reset Quiz Progress">
+                <i class="ri-restart-line"></i> Reset All
+              </button>
             </div>
           </div>
-        `).join('')}
-      </div>
+          <div class="sql-progress-bar-wrap">
+            <div class="sql-progress-bar-fill" id="sql-progress-fill" style="width: ${progressPct}%;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted);">
+            <span id="sql-progress-pct-text">${progressPct}% Completed</span>
+            <span>Instant Answer & Concept Reveal Active</span>
+          </div>
+        </div>
 
-      <div class="section-title-bar animate-in delay-3">
-        <h2><i class="ri-code-box-line"></i> Top 50 SQL Interview Queries</h2>
-        <span class="subtitle">${filteredQueries.length} Queries</span>
-      </div>
-
-      <div class="py-nav-filter animate-in delay-3">
-        <button class="filter-chip ${sqlFilter === 'all' ? 'active' : ''}" data-sql-filter="all">All Queries (${SQL_DATA.queries.length})</button>
-        ${categories.map(cat => {
-          const count = SQL_DATA.queries.filter(q => q.category === cat).length;
-          return `<button class="filter-chip ${sqlFilter === cat ? 'active' : ''}" data-sql-filter="${cat}">${cat} (${count})</button>`;
-        }).join('')}
-      </div>
-
-      <div class="top30-list animate-in delay-4">
-        ${filteredQueries.map((q, i) => `
-          <div class="q-card-accordion animate-in delay-${Math.min(i % 5 + 1, 5)}" id="sql-acc-${q.id}">
-            <div class="q-acc-header" onclick="toggleAccordion('sql-acc-${q.id}')">
-              <div class="q-acc-left">
-                <span class="q-badge-num">Q${q.id < 10 ? '0' + q.id : q.id}</span>
-                <span class="q-acc-title">${escapeHtml(q.question)}</span>
-              </div>
-              <div class="q-acc-meta">
-                <span class="q-acc-cat">${escapeHtml(q.category)}</span>
-                <i class="ri-arrow-down-s-line q-acc-chevron"></i>
+        <!-- Standard Scenario Benchmark Schema Card (Collapsible) -->
+        <div class="sql-schema-banner animate-in delay-2">
+          <div class="sql-schema-banner-header" onclick="toggleSqlSchema()">
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <i class="ri-database-2-fill" style="color: #38bdf8; font-size: 1.15rem;"></i>
+              <div>
+                <strong style="color: var(--text-primary); font-size: 0.98rem;">Standard Scenario Benchmark Schema</strong>
+                <span style="font-size: 0.82rem; color: var(--text-secondary); margin-left: 0.5rem;">(Departments, Employees, Projects, Emp_projects)</span>
               </div>
             </div>
-            <div class="q-acc-body">
-              <div class="py-code-block" style="margin-top: 1rem;">
-                <div class="py-code-header">
-                  <span><i class="ri-database-2-line"></i> SQL Query</span>
-                  <button class="copy-btn" onclick="copyCodeSnippet(this)"><i class="ri-file-copy-line"></i> Copy</button>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 0.82rem; color: var(--accent-blue);">${sqlSchemaExpanded ? 'Hide Schema' : 'View Schema'}</span>
+              <i class="ri-arrow-${sqlSchemaExpanded ? 'up' : 'down'}-s-line" style="color: var(--accent-blue);"></i>
+            </div>
+          </div>
+          ${sqlSchemaExpanded ? `
+            <div class="sql-schema-grid-compact animate-in">
+              <div class="sql-schema-box">
+                <h4><i class="ri-table-line"></i> Departments</h4>
+                <div class="sql-schema-cols">
+                  • <strong>dept_id</strong> <span class="pk-badge">PK</span> INT<br>
+                  • <strong>dept_name</strong> VARCHAR(50)<br>
+                  • <strong>region</strong> VARCHAR(30)
                 </div>
-                <pre>${escapeHtml(q.sql)}</pre>
               </div>
-              <div class="q-acc-answer" style="padding-top: 0.5rem;">
-                <strong>Explanation:</strong> ${escapeHtml(q.explanation)}
+              <div class="sql-schema-box">
+                <h4><i class="ri-table-line"></i> Employees</h4>
+                <div class="sql-schema-cols">
+                  • <strong>emp_id</strong> <span class="pk-badge">PK</span> INT<br>
+                  • <strong>emp_name</strong> VARCHAR(50)<br>
+                  • <strong>dept_id</strong> <span style="background: rgba(56,189,248,0.15); color: #38bdf8; padding: 1px 4px; border-radius: 4px; font-size: 0.72rem;">FK</span> INT (NULL)<br>
+                  • <strong>salary</strong> DECIMAL(12,2) (NULL)<br>
+                  • <strong>manager_id</strong> <span style="background: rgba(56,189,248,0.15); color: #38bdf8; padding: 1px 4px; border-radius: 4px; font-size: 0.72rem;">FK</span> INT (NULL)
+                </div>
+              </div>
+              <div class="sql-schema-box">
+                <h4><i class="ri-table-line"></i> Projects</h4>
+                <div class="sql-schema-cols">
+                  • <strong>project_id</strong> <span class="pk-badge">PK</span> INT<br>
+                  • <strong>project_name</strong> VARCHAR(50)<br>
+                  • <strong>budget</strong> DECIMAL(14,2)
+                </div>
+              </div>
+              <div class="sql-schema-box">
+                <h4><i class="ri-table-line"></i> Emp_projects</h4>
+                <div class="sql-schema-cols">
+                  • <strong>emp_id</strong> <span class="pk-badge">PK</span> <span style="background: rgba(56,189,248,0.15); color: #38bdf8; padding: 1px 4px; border-radius: 4px; font-size: 0.72rem;">FK</span> INT<br>
+                  • <strong>project_id</strong> <span class="pk-badge">PK</span> <span style="background: rgba(56,189,248,0.15); color: #38bdf8; padding: 1px 4px; border-radius: 4px; font-size: 0.72rem;">FK</span> INT<br>
+                  • <strong>hours_billed</strong> DECIMAL(8,2) (NULL)
+                </div>
               </div>
             </div>
-          </div>
-        `).join('')}
-      </div>
+          ` : ''}
+        </div>
 
-      ${filteredQueries.length === 0 ? `
-        <div class="no-results"><i class="ri-search-line"></i><p>No matching SQL queries found.</p></div>
-      ` : ''}
+        <!-- Filter Chips: Modules & Status -->
+        <div class="py-nav-filter animate-in delay-2" style="margin-bottom: 0.75rem;">
+          <button class="filter-chip ${sqlModuleFilter === 'all' ? 'active' : ''}" data-sql-module="all">All Modules (${totalMcqs})</button>
+          <button class="filter-chip ${sqlModuleFilter === '1' ? 'active' : ''}" data-sql-module="1">Module 1: GROUP BY Foundations (Q1-Q15)</button>
+          <button class="filter-chip ${sqlModuleFilter === '2' ? 'active' : ''}" data-sql-module="2">Module 2: HAVING Filtration (Q16-Q30)</button>
+          <button class="filter-chip ${sqlModuleFilter === '3' ? 'active' : ''}" data-sql-module="3">Module 3: JOIN Mechanics (Q31-Q50)</button>
+        </div>
+
+        <div class="py-nav-filter animate-in delay-2" style="margin-bottom: 1.5rem;">
+          <span style="font-size: 0.85rem; color: var(--text-muted); align-self: center; margin-right: 0.25rem;">Status:</span>
+          <button class="filter-chip ${sqlStatusFilter === 'all' ? 'active' : ''}" data-sql-status="all">All</button>
+          <button class="filter-chip ${sqlStatusFilter === 'unattempted' ? 'active' : ''}" data-sql-status="unattempted">Unattempted</button>
+          <button class="filter-chip ${sqlStatusFilter === 'correct' ? 'active' : ''}" data-sql-status="correct" style="border-color: rgba(16,185,129,0.3);">Correct (${correctCount})</button>
+          <button class="filter-chip ${sqlStatusFilter === 'wrong' ? 'active' : ''}" data-sql-status="wrong" style="border-color: rgba(239,68,68,0.3);">Incorrect (${attemptedCount - correctCount})</button>
+        </div>
+
+        <!-- MCQs List -->
+        <div class="sql-mcqs-container animate-in delay-3">
+          ${mcqQuestions.map((q) => {
+            const userAns = sqlUserAnswers[q.id];
+            const isAnswered = !!userAns && userAns.selectedText !== null;
+            const isCorrect = isAnswered && userAns.isCorrect === true;
+            const isWrong = isAnswered && userAns.isCorrect === false;
+            const isRevealed = (userAns && userAns.revealed) || isAnswered;
+
+            let cardClass = 'sql-mcq-card-enhanced animate-in delay-1';
+            if (isCorrect) cardClass += ' solved-correct';
+            else if (isWrong) cardClass += ' solved-wrong';
+
+            return `
+              <div class="${cardClass}" id="sql-mcq-card-${q.id}">
+                <div class="sql-mcq-meta">
+                  <div class="sql-mcq-meta-left">
+                    <span class="sql-q-badge">Q${q.id < 10 ? '0' + q.id : q.id}</span>
+                    <span class="sql-mod-pill">${escapeHtml(q.moduleTitle)}</span>
+                  </div>
+                  <div id="sql-status-badge-${q.id}">
+                    ${isCorrect ? `
+                      <span style="color: #10b981; font-weight: 600; font-size: 0.85rem;"><i class="ri-checkbox-circle-fill"></i> Correct</span>
+                    ` : isWrong ? `
+                      <span style="color: #ef4444; font-weight: 600; font-size: 0.85rem;"><i class="ri-close-circle-fill"></i> Incorrect</span>
+                    ` : `
+                      <span style="color: var(--text-muted); font-size: 0.85rem;"><i class="ri-record-circle-line"></i> Unattempted</span>
+                    `}
+                  </div>
+                </div>
+
+                <h3 class="sql-mcq-title">${escapeHtml(q.title)}</h3>
+                <div class="sql-mcq-prompt">${escapeHtml(q.prompt)}</div>
+
+                ${q.code ? `
+                  <div class="sql-code-snippet">
+                    <div class="sql-code-snippet-header">
+                      <span><i class="ri-database-2-line"></i> SQL Scenario Benchmark Query</span>
+                      <button class="copy-btn" onclick="copyCodeSnippet(this)"><i class="ri-file-copy-line"></i> Copy</button>
+                    </div>
+                    <pre>${escapeHtml(q.code)}</pre>
+                  </div>
+                ` : ''}
+
+                <!-- MCQ Options (A, B, C, D) -->
+                <div class="sql-options-list">
+                  ${q.options.map((opt, optIdx) => {
+                    const optLetter = opt.charAt(0);
+                    const optClean = opt.substring(2).trim();
+                    const isOptionCorrect = (opt === q.correctAnswer) || opt.startsWith(q.answerLetter + ')');
+                    const isUserSelected = isAnswered && (userAns.selectedIndex === optIdx || userAns.selectedText === opt);
+
+                    let btnClass = 'sql-opt-btn';
+                    if (isAnswered) {
+                      if (isOptionCorrect) btnClass += ' correct';
+                      else if (isUserSelected && !isCorrect) btnClass += ' wrong';
+                    }
+
+                    return `
+                      <button class="${btnClass}" ${isAnswered ? 'disabled' : ''} onclick="checkSqlMcq(this, ${q.id}, ${optIdx})">
+                        <span class="sql-opt-letter">${optLetter}</span>
+                        <span>${escapeHtml(optClean)}</span>
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+
+                <!-- Action Controls (Reveal / Try Again) -->
+                <div class="sql-action-row">
+                  <button class="mcq-reveal-btn" id="sql-reveal-btn-${q.id}" onclick="toggleSqlConcept(${q.id})" style="${isRevealed ? 'display: none;' : ''}">
+                    <i class="ri-lightbulb-line"></i> Reveal Answer & Concept
+                  </button>
+                  <button class="mcq-reveal-btn" id="sql-try-again-${q.id}" onclick="resetSingleSqlMcq(${q.id})" style="${isAnswered ? 'display: inline-flex;' : 'display: none;'} border-color: rgba(56,189,248,0.4); color: #38bdf8;">
+                    <i class="ri-refresh-line"></i> Try Again
+                  </button>
+                </div>
+
+                <!-- Answer & Concept Panel -->
+                <div class="sql-concept-card" id="sql-concept-${q.id}" data-qid="${q.id}" style="${isRevealed ? 'display: block;' : 'display: none;'}">
+                  <div class="sql-concept-header">
+                    <div class="sql-ans-tag">
+                      <i class="ri-check-line"></i> Correct Answer: ${escapeHtml(q.answerLetter || q.correctAnswer.charAt(0))}
+                    </div>
+                    <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 600;">
+                      <i class="ri-brain-line"></i> DBA Architectural Concept
+                    </span>
+                  </div>
+                  <div class="sql-concept-body">
+                    <strong>Relational Engine Concept:</strong><br>${escapeHtml(q.concept)}
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+
+          ${mcqQuestions.length === 0 ? `
+            <div class="no-results animate-in">
+              <i class="ri-search-line"></i>
+              <p>No matching SQL scenarios found for the selected filter or search term.</p>
+            </div>
+          ` : ''}
+        </div>
+      ` : `
+        <!-- ═══ TOP 50 QUERIES VIEW ═══ -->
+        <div class="section-title-bar animate-in delay-1">
+          <h2><i class="ri-layout-masonry-line"></i> Database Schema Explorer</h2>
+          <span class="subtitle">Reference tables used across all queries</span>
+        </div>
+
+        <div class="schema-grid animate-in delay-2">
+          ${SQL_DATA.tables.map(tbl => `
+            <div class="schema-card">
+              <div class="schema-header">
+                <h3><i class="ri-table-2"></i> ${escapeHtml(tbl.name)}</h3>
+                <span class="table-tag">TABLE</span>
+              </div>
+              <div class="schema-desc">${escapeHtml(tbl.description)}</div>
+              <div class="schema-table-wrap">
+                <table class="schema-table">
+                  <thead>
+                    <tr>
+                      <th>Column</th>
+                      <th>Type</th>
+                      ${Object.keys(tbl.sampleRows[0] || {}).map(k => `<th>${escapeHtml(k)} (Sample)</th>`).join('')}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${tbl.columns.map((col, idx) => `
+                      <tr>
+                        <td>
+                          <strong>${escapeHtml(col.name)}</strong>
+                          ${col.isKey ? '<span class="pk-badge">PK</span>' : ''}
+                        </td>
+                        <td><span class="sql-type">${escapeHtml(col.type)}</span></td>
+                        ${tbl.sampleRows.map(row => `<td>${escapeHtml(String(row[col.name] ?? ''))}</td>`).join('')}
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="section-title-bar animate-in delay-3">
+          <h2><i class="ri-code-box-line"></i> Top 50 SQL Interview Queries</h2>
+          <span class="subtitle">${filteredQueries.length} Queries</span>
+        </div>
+
+        <div class="py-nav-filter animate-in delay-3">
+          <button class="filter-chip ${sqlFilter === 'all' ? 'active' : ''}" data-sql-filter="all">All Queries (${SQL_DATA.queries.length})</button>
+          ${categories.map(cat => {
+            const count = SQL_DATA.queries.filter(q => q.category === cat).length;
+            return `<button class="filter-chip ${sqlFilter === cat ? 'active' : ''}" data-sql-filter="${cat}">${cat} (${count})</button>`;
+          }).join('')}
+        </div>
+
+        <div class="top30-list animate-in delay-4">
+          ${filteredQueries.map((q, i) => `
+            <div class="q-card-accordion animate-in delay-${Math.min(i % 5 + 1, 5)}" id="sql-acc-${q.id}">
+              <div class="q-acc-header" onclick="toggleAccordion('sql-acc-${q.id}')">
+                <div class="q-acc-left">
+                  <span class="q-badge-num">Q${q.id < 10 ? '0' + q.id : q.id}</span>
+                  <span class="q-acc-title">${escapeHtml(q.question)}</span>
+                </div>
+                <div class="q-acc-meta">
+                  <span class="q-acc-cat">${escapeHtml(q.category)}</span>
+                  <i class="ri-arrow-down-s-line q-acc-chevron"></i>
+                </div>
+              </div>
+              <div class="q-acc-body">
+                <div class="py-code-block" style="margin-top: 1rem;">
+                  <div class="py-code-header">
+                    <span><i class="ri-database-2-line"></i> SQL Query</span>
+                    <button class="copy-btn" onclick="copyCodeSnippet(this)"><i class="ri-file-copy-line"></i> Copy</button>
+                  </div>
+                  <pre>${escapeHtml(q.sql)}</pre>
+                </div>
+                <div class="q-acc-answer" style="padding-top: 0.5rem;">
+                  <strong>Explanation:</strong> ${escapeHtml(q.explanation)}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        ${filteredQueries.length === 0 ? `
+          <div class="no-results"><i class="ri-search-line"></i><p>No matching SQL queries found.</p></div>
+        ` : ''}
+      `}
     `;
 
+    // Bind Mode Tab buttons
+    app.querySelectorAll('[data-sql-tab]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sqlTab = btn.dataset.sqlTab;
+        renderSqlHome();
+      });
+    });
+
+    // Bind Module Filter buttons
+    app.querySelectorAll('[data-sql-module]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        sqlModuleFilter = chip.dataset.sqlModule;
+        renderSqlHome();
+      });
+    });
+
+    // Bind Status Filter buttons
+    app.querySelectorAll('[data-sql-status]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        sqlStatusFilter = chip.dataset.sqlStatus;
+        renderSqlHome();
+      });
+    });
+
+    // Bind Category Filter buttons for Queries
     app.querySelectorAll('[data-sql-filter]').forEach(chip => {
       chip.addEventListener('click', () => {
         sqlFilter = chip.dataset.sqlFilter;
@@ -3099,6 +3423,144 @@
 
     const expl = document.getElementById(explId);
     if (expl) expl.style.display = 'block';
+  };
+
+  // ── SQL MCQ Masterclass Checker ──
+  window.checkSqlMcq = function (btn, qId, optIndex) {
+    if (!window.SQL_MCQ_DATA) return;
+    const q = SQL_MCQ_DATA.questions.find(item => item.id === qId);
+    if (!q) return;
+
+    const card = document.getElementById(`sql-mcq-card-${qId}`);
+    if (!card) return;
+
+    const allBtns = card.querySelectorAll('.sql-opt-btn');
+    const selectedText = q.options[optIndex];
+    const isCorrect = (selectedText === q.correctAnswer) || selectedText.startsWith(q.answerLetter + ')');
+
+    allBtns.forEach((b, idx) => {
+      b.disabled = true;
+      const bText = q.options[idx];
+      if (bText === q.correctAnswer || bText.startsWith(q.answerLetter + ')')) {
+        b.classList.add('correct');
+      }
+    });
+
+    if (!isCorrect) {
+      btn.classList.add('wrong');
+      card.classList.remove('solved-correct');
+      card.classList.add('solved-wrong');
+    } else {
+      card.classList.remove('solved-wrong');
+      card.classList.add('solved-correct');
+    }
+
+    sqlUserAnswers[qId] = {
+      selectedText: selectedText,
+      selectedIndex: optIndex,
+      isCorrect: isCorrect,
+      revealed: true
+    };
+    saveSqlMcqProgress();
+
+    const conceptPanel = document.getElementById(`sql-concept-${qId}`);
+    if (conceptPanel) {
+      conceptPanel.style.display = 'block';
+    }
+
+    const revealBtn = document.getElementById(`sql-reveal-btn-${qId}`);
+    if (revealBtn) {
+      revealBtn.style.display = 'none';
+    }
+
+    const statusBadge = document.getElementById(`sql-status-badge-${qId}`);
+    if (statusBadge) {
+      statusBadge.innerHTML = isCorrect 
+        ? '<span style="color: #10b981; font-weight: 600; font-size: 0.85rem;"><i class="ri-checkbox-circle-fill"></i> Correct</span>'
+        : '<span style="color: #ef4444; font-weight: 600; font-size: 0.85rem;"><i class="ri-close-circle-fill"></i> Incorrect</span>';
+    }
+
+    const tryAgainBtn = document.getElementById(`sql-try-again-${qId}`);
+    if (tryAgainBtn) {
+      tryAgainBtn.style.display = 'inline-flex';
+    }
+
+    updateSqlDashboard();
+  };
+
+  window.toggleSqlConcept = function (qId) {
+    const conceptPanel = document.getElementById(`sql-concept-${qId}`);
+    if (!conceptPanel) return;
+
+    if (conceptPanel.style.display === 'none' || !conceptPanel.style.display) {
+      conceptPanel.style.display = 'block';
+      if (!sqlUserAnswers[qId]) {
+        sqlUserAnswers[qId] = { revealed: true, isCorrect: null, selectedText: null };
+      } else {
+        sqlUserAnswers[qId].revealed = true;
+      }
+      saveSqlMcqProgress();
+    } else {
+      conceptPanel.style.display = 'none';
+      if (sqlUserAnswers[qId]) {
+        sqlUserAnswers[qId].revealed = false;
+        saveSqlMcqProgress();
+      }
+    }
+  };
+
+  window.resetSingleSqlMcq = function (qId) {
+    delete sqlUserAnswers[qId];
+    saveSqlMcqProgress();
+
+    const card = document.getElementById(`sql-mcq-card-${qId}`);
+    if (!card) {
+      renderSqlHome();
+      return;
+    }
+
+    card.classList.remove('solved-correct', 'solved-wrong');
+    const allBtns = card.querySelectorAll('.sql-opt-btn');
+    allBtns.forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+
+    const conceptPanel = document.getElementById(`sql-concept-${qId}`);
+    if (conceptPanel) conceptPanel.style.display = 'none';
+
+    const revealBtn = document.getElementById(`sql-reveal-btn-${qId}`);
+    if (revealBtn) revealBtn.style.display = 'inline-flex';
+
+    const statusBadge = document.getElementById(`sql-status-badge-${qId}`);
+    if (statusBadge) {
+      statusBadge.innerHTML = '<span style="color: var(--text-muted); font-size: 0.85rem;"><i class="ri-record-circle-line"></i> Unattempted</span>';
+    }
+
+    const tryAgainBtn = document.getElementById(`sql-try-again-${qId}`);
+    if (tryAgainBtn) tryAgainBtn.style.display = 'none';
+
+    updateSqlDashboard();
+  };
+
+  window.resetAllSqlMcqs = function () {
+    if (confirm('Are you sure you want to reset all your SQL MCQ progress and answers?')) {
+      sqlUserAnswers = {};
+      saveSqlMcqProgress();
+      renderSqlHome();
+    }
+  };
+
+  window.revealAllSqlConcepts = function () {
+    const panels = document.querySelectorAll('.sql-concept-card');
+    panels.forEach(p => {
+      p.style.display = 'block';
+    });
+  };
+
+  window.toggleSqlSchema = function () {
+    sqlSchemaExpanded = !sqlSchemaExpanded;
+    renderSqlHome();
   };
 
   // ── Global Accordion Toggle ──
